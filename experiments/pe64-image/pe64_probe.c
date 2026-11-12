@@ -143,7 +143,7 @@ static bool patch_one_import(uint8_t *image, size_t image_size,
     return true;
 }
 
-static int execute(const uint8_t *file, size_t file_len, size_t page_size) {
+static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool run_code) {
     if (file_len < 64 || u16(file) != 0x5a4d)
         return reject("DOS MZ signature missing");
     size_t pe = u32(file + 0x3c);
@@ -298,25 +298,35 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size) {
             perror("mprotect section"); munmap(image, image_size); free(sections); return 1;
         }
     }
-    typedef int (__attribute__((ms_abi)) *win_entry_fn)(void);
-    win_entry_fn fn = (win_entry_fn)(void *)(image + entry);
-    int result = fn();
-    printf("pe64_entry_return=%d applied_dir64=%zu imports_patched=%zu image_size=%" PRIu32
-           " actual_base=%p preferred_base=0x%" PRIx64 "\n",
-           result, changed, imports_patched, image_size, (void *)image, preferred_base);
+    int result = 0;
+    if (run_code) {
+        typedef int (__attribute__((ms_abi)) *win_entry_fn)(void);
+        win_entry_fn fn = (win_entry_fn)(void *)(image + entry);
+        result = fn();
+        printf("pe64_entry_return=%d applied_dir64=%zu imports_patched=%zu image_size=%" PRIu32
+               " actual_base=%p preferred_base=0x%" PRIx64 "\n",
+               result, changed, imports_patched, image_size, (void *)image, preferred_base);
+    } else {
+        printf("PARSE_OK applied_dir64=%zu imports_patched=%zu image_size=%" PRIu32 "\n",
+               changed, imports_patched, image_size);
+    }
     munmap(image, image_size);
     free(sections);
-    return result == 42 ? 0 : reject("entry returned unexpected value");
+    return !run_code || result == 42 ? 0 : reject("entry returned unexpected value");
 }
 
 int main(int argc, char **argv) {
-    if (argc != 2) { fprintf(stderr, "usage: %s <trusted-no-imports-pe64-fixture.exe>\n", argv[0]); return 2; }
+    if (argc != 3 || (strcmp(argv[1], "--parse-only") != 0 &&
+                      strcmp(argv[1], "--execute-trusted-fixture") != 0)) {
+        fprintf(stderr, "usage: %s {--parse-only|--execute-trusted-fixture} file.exe\n", argv[0]);
+        return 2;
+    }
     long p = sysconf(_SC_PAGESIZE);
     if (p != 4096) return reject("this deliberately limited probe requires 4096-byte pages");
     uint8_t *file = NULL;
     size_t len = 0;
-    if (read_file(argv[1], &file, &len)) return 1;
-    int status = execute(file, len, (size_t)p);
+    if (read_file(argv[2], &file, &len)) return 1;
+    int status = execute(file, len, (size_t)p, strcmp(argv[1], "--execute-trusted-fixture") == 0);
     free(file);
     return status;
 }
