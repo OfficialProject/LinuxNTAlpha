@@ -5,9 +5,21 @@
 #include <string.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
-#include <linux/ntsync.h>
+/* Older distro/kernel header packages may not ship this header at all. */
+#if defined(__has_include)
+# if __has_include(<linux/ntsync.h>)
+#  define HAS_NTSYNC_UAPI_HEADER 1
+# endif
+#endif
+#ifdef HAS_NTSYNC_UAPI_HEADER
+# include <linux/ntsync.h>
+#endif
 
 int main(void) {
+#ifndef HAS_NTSYNC_UAPI_HEADER
+    puts("SKIP: installed libc kernel headers do not provide linux/ntsync.h");
+    return 77;
+#else
 #ifdef NTSYNC_IOC_WAIT_ANY
     _Static_assert(sizeof(struct ntsync_sem_args) == 8, "unexpected ntsync semaphore UAPI struct size");
     _Static_assert(sizeof(struct ntsync_wait_args) == 40, "unexpected ntsync wait UAPI struct size");
@@ -36,5 +48,6 @@ int main(void) {
            "old CREATE_SEM=0x%lx, sem_args_size=%zu\n",
            (unsigned long)NTSYNC_IOC_CREATE_SEM, sizeof(struct ntsync_sem_args));
     return 77;
+#endif
 #endif
 }
