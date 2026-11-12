@@ -16,3 +16,10 @@ experiments/pe64-image/gs_fixture.exe
 experiments/pe64-image/gs_fixture.obj
 experiments/pe64-image/sud_fixture.exe
 experiments/pe64-image/sud_fixture.obj
+experiments/pe64-image/ntdll.dll
+experiments/pe64-image/ntdll.lib
+experiments/pe64-image/ntdll.exp
+experiments/pe64-image/ntdll_stub.obj
+experiments/pe64-image/ntdll_fixture.obj
+experiments/pe64-image/ntdll_fixture.exe
+experiments/pe64-image/ntdll_minimal_test
