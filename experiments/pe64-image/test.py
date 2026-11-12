@@ -78,5 +78,50 @@ class MinimalPeLoader(unittest.TestCase):
                 self.assertIn("REJECT:", result.stderr)
 
 
+    def test_allowed_test_import(self):
+        image = (HERE / "import_fixture.exe").read_bytes()
+        for iteration in range(5):
+            with self.subTest(iteration=iteration):
+                result = run(image)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn("pe64_entry_return=42", result.stdout)
+                self.assertIn("imports_patched=1", result.stdout)
+                self.assertRegex(result.stdout, r"applied_dir64=[1-9][0-9]*")
+
+    def test_unapproved_imports_rejected(self):
+        image = (HERE / "import_fixture.exe").read_bytes()
+        import_rva = struct.unpack_from("<I", image, OPT + 112 + 8)[0]
+        first = struct.unpack_from("<I", image, SECTIONS + 40 + 20)[0]
+        rdata_rva = struct.unpack_from("<I", image, SECTIONS + 40 + 12)[0]
+
+        def location(rva):
+            return first + rva - rdata_rva
+
+        imp_off = location(import_rva)
+        name_rva = struct.unpack_from("<I", image, imp_off + 12)[0]
+        lookup_rva = struct.unpack_from("<I", image, imp_off)[0]
+        iat_rva = struct.unpack_from("<I", image, imp_off + 16)[0]
+        hint_name = struct.unpack_from("<Q", image, location(lookup_rva))[0]
+        assert image[location(name_rva):location(name_rva) + 10] == b"probe.dll\0"
+        assert image[location(hint_name) + 2:location(hint_name) + 11] == b"add_five\0"
+
+        mutations = {
+            "foreign_dll_name": lambda b: b.__setitem__(slice(location(name_rva), location(name_rva) + 9), b"evil!.dll"),
+            "foreign_function_name": lambda b: b.__setitem__(slice(location(hint_name) + 2, location(hint_name) + 10), b"bad_name"),
+            "ordinal_import_not_supported": lambda b: struct.pack_into("<Q", b, location(lookup_rva), 0x8000000000000001),
+            "multiple_imports_not_supported": lambda b: struct.pack_into("<Q", b, location(iat_rva) + 8, 1),
+            "terminator_descriptor_not_zero": lambda b: u32(b, imp_off + 20, 1),
+            "iat_missing": lambda b: u32(b, OPT + 112 + 12 * 8, 0),
+            "import_size_wrong": lambda b: u32(b, OPT + 112 + 8 + 4, 20),
+        }
+        for name, mutate in mutations.items():
+            with self.subTest(name=name):
+                b = bytearray(image)
+                mutate(b)
+                result = run(b)
+                self.assertEqual(result.returncode, 1, name + result.stdout + result.stderr)
+                self.assertIn("REJECT:", result.stderr)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
