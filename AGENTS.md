@@ -35,7 +35,7 @@ The user requested **no routine progress reports**. Keep findings in GitHub; pro
 - Compiler-generated Microsoft x64 ABI calls in Linux ELF (R17) prove only a narrow call bridge. A real PE fixture (R19) executes natively; an imported fixture (R20) calls one allowlisted synthetic function through an IAT. R23 added parse-only mode for hostile test mutations; require --execute-trusted-fixture explicitly for any code execution. Both still lack Windows operating-system services, TLS, exceptions and genuine DLL loading.
 - A Linux syscall intercepted with SUD (R16) proves only interception mechanics, not NT syscall execution or isolation; R22's ~1-microsecond signal cost is a microbenchmark result on one container, not an application slowdown estimate.
 - An old installed ntsync UAPI header or absent /dev/ntsync (R18) is **SKIP**, not a valid kernel synchronization benchmark.
-- R24 demonstrates synthetic per-thread GS/TIB data coexisting with glibc FS TLS through voluntary yields and SIGUSR1 on one Linux kernel. It does NOT establish a real Windows TEB/PEB, TLS callbacks or OS exception handling.
+- R24 demonstrates synthetic per-thread GS/TIB data coexisting with glibc FS TLS through voluntary yields and SIGUSR1 on one Linux kernel. R25 adds one real Windows-target PE fixture reading GS:0x30 and calling a synthetic IAT import; neither establishes a real Windows TEB/PEB, TLS callbacks or OS exception handling.
 - When adding tests, exercise boundary conditions and negative controls; add a README and a reproducible invocation.
 
 ## Current high-value research questions
