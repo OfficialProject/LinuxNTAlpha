@@ -126,7 +126,7 @@ class MinimalPeLoader(unittest.TestCase):
 
 
     def test_parse_only_accepts_trusted_fixtures(self):
-        for file in ("fixture.exe", "import_fixture.exe", "gs_fixture.exe", "sud_fixture.exe"):
+        for file in ("fixture.exe", "import_fixture.exe", "gs_fixture.exe", "sud_fixture.exe", "ntdll_fixture.exe"):
             with self.subTest(file=file):
                 result = run((HERE / file).read_bytes(), execute=False)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
@@ -137,7 +137,8 @@ class MinimalPeLoader(unittest.TestCase):
         rng = random.Random(20261112)
         fixtures = [IMAGE, (HERE / "import_fixture.exe").read_bytes(),
                     (HERE / "gs_fixture.exe").read_bytes(),
-                    (HERE / "sud_fixture.exe").read_bytes()]
+                    (HERE / "sud_fixture.exe").read_bytes(),
+                    (HERE / "ntdll_fixture.exe").read_bytes()]
         for index in range(200):
             original = fixtures[index % len(fixtures)]
             blob = bytearray(original)
@@ -176,6 +177,48 @@ class MinimalPeLoader(unittest.TestCase):
                 self.assertIn("pe64_entry_return=42", result.stdout)
                 self.assertIn("sud_traps=1 unexpected=0 observed_service=39", result.stdout)
                 self.assertRegex(result.stdout, r"applied_dir64=[1-9][0-9]*")
+
+
+    def test_ntdll_rtl_compare_memory_import(self):
+        image = (HERE / "ntdll_fixture.exe").read_bytes()
+        for iteration in range(5):
+            with self.subTest(iteration=iteration):
+                result = run(image, execute=True)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn("pe64_entry_return=42", result.stdout)
+                self.assertIn("imports_patched=1", result.stdout)
+                self.assertRegex(result.stdout, r"applied_dir64=[1-9][0-9]*")
+
+        pe = struct.unpack_from("<I", image, 0x3C)[0]
+        coff = pe + 4
+        opt = coff + 20
+        sections_at = opt + struct.unpack_from("<H", image, coff + 16)[0]
+        section_count = struct.unpack_from("<H", image, coff + 2)[0]
+
+        def file_offset(rva):
+            for i in range(section_count):
+                sec = sections_at + i * 40
+                sec_rva, raw_size, raw_off = struct.unpack_from("<III", image, sec + 12)
+                if sec_rva <= rva < sec_rva + raw_size:
+                    return raw_off + rva - sec_rva
+            raise AssertionError("fixture RVA outside file-backed section")
+
+        import_rva = struct.unpack_from("<I", image, opt + 112 + 8)[0]
+        import_off = file_offset(import_rva)
+        dll_rva = struct.unpack_from("<I", image, import_off + 12)[0]
+        lookup_rva = struct.unpack_from("<I", image, import_off)[0]
+        func_rva = struct.unpack_from("<Q", image, file_offset(lookup_rva))[0]
+        dll_at = file_offset(dll_rva)
+        func_at = file_offset(func_rva) + 2
+        self.assertEqual(image[dll_at:dll_at + 10], b"ntdll.dll\0")
+        self.assertEqual(image[func_at:func_at + 17], b"RtlCompareMemory\0")
+        for name, where in (("bad_dll", dll_at), ("bad_import", func_at)):
+            with self.subTest(invalid=name):
+                damaged = bytearray(image)
+                damaged[where] ^= 0x20
+                result = run(damaged)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertIn("REJECT:", result.stderr)
 
 
 if __name__ == "__main__":
