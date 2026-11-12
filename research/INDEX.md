@@ -39,6 +39,8 @@ Read with [research plan](PLAN.md) and [architecture decisions](DECISIONS.md). F
 
 - [R25 — real Windows-target PE reads synthetic GS TIB](R25_PE64_GS_TIB_EXECUTION.md): 5 successful PE entry calls that read GS:0x30 and call one imported Linux MS-ABI stub; no actual Windows TEB/PEB or kernel services.
 
+- [R26 — Windows-target PE raw syscall intercepted by SUD](R26_PE64_RAW_SYSCALL_SUD.md): PE machine code issues an NT-style syscall deliberately colliding with Linux getpid; host returns one synthetic SIGSYS result (five passes). This is NOT a working NT service table or sandbox.
+
 Executable sources and makefiles: [experiments](../experiments/). Command: **make -C experiments test** (check each PASS/SKIP separately).
 
 ## Highest-priority untested gates
