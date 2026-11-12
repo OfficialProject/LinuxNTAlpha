@@ -58,6 +58,9 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R41 — vectored exception/continue handler lifecycle](R41_VECTORED_EXCEPTION_CONTINUE_GATES.md): primary Microsoft documentation; separate process-wide callback ordering, removal, and continuation from x64 unwind tables. Windows-reference conformance gates proposed; no experiment.
 
+
+- [R42 — thread suspension, resume counts and context APIs](R42_THREAD_SUSPEND_CONTEXT_GATES.md): Microsoft primary API contracts; separate logical suspend counts and x64 context fidelity from Linux thread signals. Proposed Windows-reference tests only; no experiment.
+
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
