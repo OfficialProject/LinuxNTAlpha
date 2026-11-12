@@ -34,3 +34,6 @@ References:
 
 ## Remaining uncertainty
 Tag refs may not expose out-of-tree distro patches or future changes. This is a pinned source comparison, not an assertion that any version ever released is ABI-identical.
+
+## Additional verified older transition (see R18)
+The absence of change among v6.18, v6.19 and master **does not** mean ntsync has never changed. Direct comparison of v6.13 vs v6.14 reveals a real change in CREATE_SEM ioctl encoding (0xc00c4e80 vs 0x40084e80) and semaphore struct size (12 vs 8 bytes). See [R18](R18_NTSYNC_ACTUAL_UAPI_TRANSITION.md) for pinned source SHAs and reproduced compiler checks.
