@@ -1,5 +1,6 @@
 """No external dependencies. Tests a trusted compiled PE fixture and corrupted copies."""
 import pathlib
+import random
 import re
 import struct
 import subprocess
@@ -24,11 +25,12 @@ def u32(data, at, value):
     struct.pack_into("<I", data, at, value)
 
 
-def run(data):
+def run(data, execute=False):
     with tempfile.TemporaryDirectory(prefix="pe64-bad-fixture-") as directory:
         path = pathlib.Path(directory) / "test.exe"
         path.write_bytes(data)
-        return subprocess.run([str(HERE / "pe64_probe"), str(path)],
+        return subprocess.run([str(HERE / "pe64_probe"),
+                               "--execute-trusted-fixture" if execute else "--parse-only", str(path)],
                               capture_output=True, text=True, timeout=10)
 
 
@@ -36,7 +38,7 @@ class MinimalPeLoader(unittest.TestCase):
     def test_valid_fixture_multiple_aslr_runs(self):
         for _ in range(5):
             with self.subTest(iteration=_):
-                result = run(IMAGE)
+                result = run(IMAGE, execute=True)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
                 self.assertIn("pe64_entry_return=42", result.stdout)
                 self.assertRegex(result.stdout, r"applied_dir64=[1-9][0-9]*")
@@ -82,7 +84,7 @@ class MinimalPeLoader(unittest.TestCase):
         image = (HERE / "import_fixture.exe").read_bytes()
         for iteration in range(5):
             with self.subTest(iteration=iteration):
-                result = run(image)
+                result = run(image, execute=True)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
                 self.assertIn("pe64_entry_return=42", result.stdout)
                 self.assertIn("imports_patched=1", result.stdout)
@@ -121,6 +123,31 @@ class MinimalPeLoader(unittest.TestCase):
                 result = run(b)
                 self.assertEqual(result.returncode, 1, name + result.stdout + result.stderr)
                 self.assertIn("REJECT:", result.stderr)
+
+
+    def test_parse_only_accepts_both_trusted_fixtures(self):
+        for file in ("fixture.exe", "import_fixture.exe"):
+            with self.subTest(file=file):
+                result = run((HERE / file).read_bytes(), execute=False)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn("PARSE_OK", result.stdout)
+                self.assertNotIn("pe64_entry_return", result.stdout)
+
+    def test_deterministic_mutations_are_parse_only(self):
+        rng = random.Random(20261112)
+        fixtures = [IMAGE, (HERE / "import_fixture.exe").read_bytes()]
+        for index in range(200):
+            original = fixtures[index % 2]
+            blob = bytearray(original)
+            for _ in range(rng.randrange(1, 6)):
+                at = rng.randrange(len(blob))
+                blob[at] ^= 1 << rng.randrange(8)
+            if index % 11 == 0:
+                blob = blob[:rng.randrange(len(blob))]
+            result = run(blob, execute=False)
+            self.assertIn(result.returncode, (0, 1),
+                          f"case={index}: return={result.returncode} stdout={result.stdout} stderr={result.stderr}")
+            self.assertNotIn("pe64_entry_return", result.stdout)
 
 
 if __name__ == "__main__":
