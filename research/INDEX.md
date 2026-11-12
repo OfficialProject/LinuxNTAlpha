@@ -33,6 +33,7 @@ Read with [research plan](PLAN.md) and [architecture decisions](DECISIONS.md). F
 - [R20 — a real PE IAT import bound to host function](R20_PE64_IAT_BRIDGE.md): a second PE64 image invokes its sole imported probe.dll!add_five via a Microsoft-ABI Linux host stub, **PASS** (five additional iterations, seven additional import rejection tests). Real Windows OS services remain unimplemented.
 
 - [R22 — exploratory SUD trap latency](R22_SYSCALL_DISPATCH_LATENCY.md): 7-batch microbenchmark, pinned CPU in one container; 20000-iteration median batch averages ~72 ns allowed vs ~1032 ns SIGSYS interception. These are NOT real-app slowdowns or p99 values.
+- [R23 — PE parse-only separation and mutation smoke test](R23_PARSE_ONLY_FUZZ_GATE.md): execution requires an explicit trusted-fixture flag; 26 known malformed cases plus 200 seeded mutations process without executing PE code. **Not a security guarantee.**
 
 Executable sources and makefiles: [experiments](../experiments/). Command: **make -C experiments test** (check each PASS/SKIP separately).
 
