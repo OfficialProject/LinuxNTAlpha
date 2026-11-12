@@ -10,6 +10,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <asm/prctl.h>
+#include <linux/prctl.h>
+#include <signal.h>
+#include <sys/prctl.h>
+#include <sys/ucontext.h>
 #include <stddef.h>
 #include <sys/syscall.h>
 #include <sys/mman.h>
@@ -177,7 +181,62 @@ static int call_entry(win_entry_fn fn, bool inject_gs, int *result) {
     return 0;
 }
 
-static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool run_code, bool inject_gs) {
+#ifndef SYS_USER_DISPATCH
+#define SYS_USER_DISPATCH 2
+#endif
+
+/* One trusted fixture only. No general Windows NT syscall mapping here. */
+static volatile unsigned char sud_selector = SYSCALL_DISPATCH_FILTER_ALLOW;
+static volatile sig_atomic_t sud_traps, sud_unexpected;
+
+static void on_sud_sigsys(int signo, siginfo_t *info, void *context) {
+    ucontext_t *uc = context;
+    if (signo != SIGSYS || info->si_code != SYS_USER_DISPATCH ||
+        info->si_syscall != SYS_getpid)
+        ++sud_unexpected;
+    ++sud_traps;
+    sud_selector = SYSCALL_DISPATCH_FILTER_ALLOW; /* Permit sigreturn. */
+    uc->uc_mcontext.gregs[REG_RAX] = 0x12345; /* Synthetic fixture-only return. */
+}
+
+static int call_entry_sud(win_entry_fn fn, int *result) {
+    struct sigaction sa = {0}, old = {0};
+    sa.sa_sigaction = on_sud_sigsys;
+    sa.sa_flags = SA_SIGINFO;
+    sigemptyset(&sa.sa_mask);
+    sud_selector = SYSCALL_DISPATCH_FILTER_ALLOW;
+    sud_traps = 0;
+    sud_unexpected = 0;
+    if (sigaction(SIGSYS, &sa, &old) != 0) {
+        perror("sigaction");
+        return 1;
+    }
+    if (prctl(PR_SET_SYSCALL_USER_DISPATCH, PR_SYS_DISPATCH_ON,
+              0UL, 0UL, &sud_selector) != 0) {
+        fprintf(stderr, "SKIP: SUD unavailable: %s\n", strerror(errno));
+        sigaction(SIGSYS, &old, NULL);
+        return 77;
+    }
+    sud_selector = SYSCALL_DISPATCH_FILTER_BLOCK;
+    *result = fn(); /* The synthetic PE code executes a raw syscall here. */
+    sud_selector = SYSCALL_DISPATCH_FILTER_ALLOW;
+    int disable_error = prctl(PR_SET_SYSCALL_USER_DISPATCH, PR_SYS_DISPATCH_OFF,
+                              0UL, 0UL, 0UL);
+    int disable_errno = errno;
+    int restore_error = sigaction(SIGSYS, &old, NULL);
+    if (disable_error != 0 || restore_error != 0) {
+        fprintf(stderr, "FAIL: could not disable SUD or restore SIGSYS handler: %s\n",
+                disable_error != 0 ? strerror(disable_errno) : "sigaction failed");
+        return 1;
+    }
+    printf("sud_traps=%d unexpected=%d observed_service=%d\n",
+           (int)sud_traps, (int)sud_unexpected, SYS_getpid);
+    if (sud_traps != 1 || sud_unexpected != 0)
+        return 1;
+    return 0;
+}
+
+static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool run_code, bool inject_gs, bool intercept_syscall) {
     if (file_len < 64 || u16(file) != 0x5a4d)
         return reject("DOS MZ signature missing");
     size_t pe = u32(file + 0x3c);
@@ -335,7 +394,7 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool 
     int result = 0;
     if (run_code) {
         win_entry_fn fn = (win_entry_fn)(void *)(image + entry);
-        int call_status = call_entry(fn, inject_gs, &result);
+        int call_status = intercept_syscall ? call_entry_sud(fn, &result) : call_entry(fn, inject_gs, &result);
         if (call_status) { munmap(image, image_size); free(sections); return call_status; }
         printf("pe64_entry_return=%d applied_dir64=%zu imports_patched=%zu image_size=%" PRIu32
                " actual_base=%p preferred_base=0x%" PRIx64 "\n",
@@ -352,8 +411,9 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool 
 int main(int argc, char **argv) {
     if (argc != 3 || (strcmp(argv[1], "--parse-only") != 0 &&
                       strcmp(argv[1], "--execute-trusted-fixture") != 0 &&
-                      strcmp(argv[1], "--execute-synthetic-gs-fixture") != 0)) {
-        fprintf(stderr, "usage: %s {--parse-only|--execute-trusted-fixture|--execute-synthetic-gs-fixture} file.exe\n", argv[0]);
+                      strcmp(argv[1], "--execute-synthetic-gs-fixture") != 0 &&
+                      strcmp(argv[1], "--execute-synthetic-sud-fixture") != 0)) {
+        fprintf(stderr, "usage: %s {--parse-only|--execute-trusted-fixture|--execute-synthetic-gs-fixture|--execute-synthetic-sud-fixture} file.exe\n", argv[0]);
         return 2;
     }
     long p = sysconf(_SC_PAGESIZE);
@@ -363,7 +423,8 @@ int main(int argc, char **argv) {
     if (read_file(argv[2], &file, &len)) return 1;
     int status = execute(file, len, (size_t)p,
                          strcmp(argv[1], "--parse-only") != 0,
-                         strcmp(argv[1], "--execute-synthetic-gs-fixture") == 0);
+                         strcmp(argv[1], "--execute-synthetic-gs-fixture") == 0,
+                         strcmp(argv[1], "--execute-synthetic-sud-fixture") == 0);
     free(file);
     return status;
 }
