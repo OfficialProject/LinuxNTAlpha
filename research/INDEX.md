@@ -26,12 +26,13 @@ Read with [research plan](PLAN.md) and [architecture decisions](DECISIONS.md). F
 - [R16 — Syscall User Dispatch](R16_SYSCALL_USER_DISPATCH_PROTOTYPE.md): Linux x86-64 native syscall interception **PASS** at GCC -O0/-O2/-O3. No Windows raw syscall test yet.
 - [R17 — bidirectional ABI bridge](R17_ABI_BRIDGE_EXPERIMENT.md): GCC-generated MS/SysV call signatures **PASS** at -O0/-O2/-O3. No PE execution yet.
 - [R18 — ntsync capability probe](R18_NTSYNC_ACTUAL_UAPI_TRANSITION.md): installed header detected as old, device absent, runtime test **SKIP**. Compiler-path tests verified; no ntsync benchmark.
-- [R19 — PE32+ native execution](R19_PE64_EXECUTION_EXPERIMENT.md): a Clang/LLD-built freestanding PE64 image runs in Linux at a relocated base and returns 42, **PASS** (five positive iterations, 19 negative malformed-image tests); imports and all real Windows OS services remain unimplemented.
+- [R19 — PE32+ native execution](R19_PE64_EXECUTION_EXPERIMENT.md): a Clang/LLD-built freestanding PE64 image runs in Linux at a relocated base and returns 42, **PASS** (five positive iterations, 19 negative malformed-image tests).
+- [R20 — a real PE IAT import bound to host function](R20_PE64_IAT_BRIDGE.md): a second PE64 image invokes its sole imported probe.dll!add_five via a Microsoft-ABI Linux host stub, **PASS** (five additional iterations, seven additional import rejection tests). Real Windows OS services remain unimplemented.
 
 Executable sources and makefiles: [experiments](../experiments/). Command: **make -C experiments test** (check each PASS/SKIP separately).
 
 ## Highest-priority untested gates
-1. Extend the R19 PE64 fixture to one controlled IAT import and API stub; keep it explicitly out of general-purpose Windows binary execution.
+1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. Real Windows-origin raw syscall interception and correct NT-status dispatch, without accidentally entering Linux syscall services.
 3. Cross-ABI unwinding, nonvolatile vector registers, TEB GS behavior and per-thread initialization.
 4. Full ntsync runtime tests on a host with a suitable device/header/module combination.
