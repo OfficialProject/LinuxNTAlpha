@@ -1,33 +1,24 @@
-# R9 — Exception unwind and ntsync revision hazards
-Date: 2026-11-12. Evidence: official Microsoft and Linux documentation. No benchmarks executed.
+# R9 — Exception unwind and ntsync source verification
 
-## Windows x64 exception unwinding (VERIFIED)
-Microsoft specifies sorted image-relative RUNTIME_FUNCTION entries in PE .pdata, referring to UNWIND_INFO (typically .xdata). On exception, the dispatcher finds the function for RIP, recognizes prolog/epilog, calls language-specific handlers when present, and reconstructs caller context using unwind operations. Leaf functions without entries are treated as return-address-on-stack. Dynamically generated code may register function tables via RtlAddFunctionTable / RtlInstallFunctionTableCallback.
+Date: 2026-11-12. Verified documentation research; no unwind execution test.
 
-Sources:
-https://learn.microsoft.com/en-us/cpp/build/exception-handling-x64
-https://learn.microsoft.com/en-us/cpp/build/x64-calling-convention
-
-## Implications
-- Signal interception alone cannot supply correct SEH or C++ unwinding.
-- Windows ABI bridge frames must be unwind-aware or explicitly terminate supported unwind domains.
-- A first-stage exception engine can validate unwind metadata and walk frames without attempting language-specific handlers; executing a real program with exception handling requires more.
-- Fuzz malformed function-table entries and chained unwind info; check bounds, cycles, alignment and stack limits.
-
-## NTSYNC UAPI revision warning (VERIFIED)
-Official docs at /userspace-api/ntsync.html and /7.0/userspace-api/ntsync.html show differing ioctl macro names and struct member ordering. The docs at /next/ show yet another layout. This is a serious source-version hazard for any adapter.
+## Windows x64 exception unwinding (documented)
+Microsoft specifies image-relative RUNTIME_FUNCTION entries in PE .pdata, referring to UNWIND_INFO (typically .xdata). On an exception, the dispatcher locates the function for the control PC, recognizes prolog/epilog regions, processes unwind operations and invokes language-specific handlers where applicable. Leaf functions without entries may be unwound as a simple return. Dynamically generated code may register function tables via RtlAddFunctionTable / RtlInstallFunctionTableCallback.
 
 Sources:
-https://docs.kernel.org/userspace-api/ntsync.html
-https://docs.kernel.org/7.0/userspace-api/ntsync.html
-https://docs.kernel.org/next/userspace-api/ntsync.html
+- https://learn.microsoft.com/en-us/cpp/build/exception-handling-x64
+- https://learn.microsoft.com/en-us/cpp/build/x64-calling-convention
 
-## Required follow-up
-1. Diff pinned include/uapi/linux/ntsync.h versions, not only documentation.
-2. Determine if changed names are aliases and whether binary struct layout actually changed.
-3. Compile ABI assertions for sizeof and offsetof on each supported kernel-header revision.
-4. Test ioctl compatibility against real kernels; don't infer binary breakage from doc drift alone.
-5. Capture source commit hashes and benchmark environments before drawing performance conclusions.
+## Implications (hypotheses pending conformance)
+- Linux signal interception alone cannot supply full Windows SEH/C++ unwinding.
+- Cross-ABI frames must either have compatible unwind behavior or explicitly delimit supported unwind domains.
+- A first-stage exception engine may validate metadata and walk frames without language-specific dispatch; a real app requires more.
+- Fuzz malformed function tables, chained unwind metadata, stack limits and alignment.
+
+## ntsync source correction
+An earlier version of this note suggested an ntsync UAPI revision hazard from differing documentation names. **That inference is withdrawn.** Direct checks of upstream Linux v6.18, v6.19 and master revealed **identical UAPI header blob SHA 6d06793512b150a80018618b698537a0e3793e54**, including the authoritative names NTSYNC_IOC_MUTEX_KILL and NTSYNC_IOC_EVENT_READ. At the same revisions, the driver implementation uses these names. The v6.18/v6.19 documentation mistakenly uses NTSYNC_IOC_KILL_OWNER / NTSYNC_IOC_READ_EVENT in section headings despite also mentioning the correct mutex name in introductory prose. This is currently a **documentation error**, not an established ABI change. See [R8](R8_NTSYNC_VERSION_DRIFT.md) for source blob SHAs and evidence.
+
+Do not add unsupported ioctl-name shims for this discrepancy. Pin actual headers, compare numeric ioctl values and structs, compile with versioned toolchains, and test behavior against installed kernels before inferring differences.
 
 ## Decision
-Keep exception support and ntsync adapter versioning as explicit acceptance gates. No performance or binary compatibility claims are established by this note.
+Windows exception support stays a separate correctness gate; ntsync compile-time and runtime conformance are required, but no header ABI drift was established in audited upstream v6.18, v6.19 or master.
