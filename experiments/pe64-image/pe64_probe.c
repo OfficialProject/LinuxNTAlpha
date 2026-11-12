@@ -1,5 +1,6 @@
 /* Minimal x86-64 PE32+ execution probe. NOT a Windows loader or sandbox. */
 #define _GNU_SOURCE
+#include "ntdll_minimal.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <inttypes.h>
@@ -134,7 +135,6 @@ static bool patch_one_import(uint8_t *image, size_t image_size,
     if (!lookup_rva || !dll_rva || destination_rva != iat_rva ||
         u32(imp + 4) || u32(imp + 8) ||
         memcmp(imp + 20, (const unsigned char[20]){0}, 20) != 0 ||
-        !image_name_equals(image, image_size, sections, section_count, dll_rva, "probe.dll") ||
         !bounds(lookup_rva, 16, image_size) ||
         !rva_has_data(sections, section_count, lookup_rva, 16)) return false;
     uint64_t name_value = u64(image + lookup_rva);
@@ -143,9 +143,16 @@ static bool patch_one_import(uint8_t *image, size_t image_size,
         !bounds((uint32_t)name_value, 2, image_size) ||
         !rva_has_data(sections, section_count, (uint32_t)name_value, 2)) return false;
     uint32_t name_rva = (uint32_t)name_value + 2;
-    if (!image_name_equals(image, image_size, sections, section_count,
-                           name_rva, "add_five")) return false;
-    store64(image + iat_rva, (uint64_t)(uintptr_t)&host_add_five);
+    bool synthetic_api =
+        image_name_equals(image, image_size, sections, section_count, dll_rva, "probe.dll") &&
+        image_name_equals(image, image_size, sections, section_count, name_rva, "add_five");
+    bool ntdll_prefix =
+        image_name_equals(image, image_size, sections, section_count, dll_rva, "ntdll.dll") &&
+        image_name_equals(image, image_size, sections, section_count, name_rva, "RtlCompareMemory");
+    if (!synthetic_api && !ntdll_prefix) return false;
+    store64(image + iat_rva, synthetic_api
+        ? (uint64_t)(uintptr_t)&host_add_five
+        : (uint64_t)(uintptr_t)&lnta_RtlCompareMemory);
     *patched = 1;
     return true;
 }
@@ -370,7 +377,7 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool 
                                         import_rva, import_len, iat_rva, iat_len,
                                         &imports_patched)) {
         munmap(image, image_size); free(sections);
-        return reject("only probe.dll!add_five is a supported import");
+        return reject("only probe.dll!add_five or ntdll.dll!RtlCompareMemory imports are supported");
     }
 
     /* Eliminate transient write+execute mappings before entering fixture code. */
