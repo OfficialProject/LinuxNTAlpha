@@ -10,3 +10,4 @@ experiments/pe64-image/import_fixture.exe
 experiments/pe64-image/probe.dll
 experiments/pe64-image/probe.lib
 experiments/pe64-image/probe.exp
+experiments/sud-latency/sud_latency
