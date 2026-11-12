@@ -1,4 +1,4 @@
-SUBPROJECTS := abi-bridge syscall-user-dispatch ntsync-capability pe64-image sud-latency
+SUBPROJECTS := abi-bridge syscall-user-dispatch ntsync-capability pe64-image sud-latency gs-teb-probe
 
 .PHONY: test clean
 
