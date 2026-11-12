@@ -26,8 +26,8 @@ Read with [research plan](PLAN.md) and [architecture decisions](DECISIONS.md). F
 - [R21 — source-level license audit](R21_CODE_REUSE_LICENSE_AUDIT.md): Linux GPL-2.0 with syscall exception, ReactOS GPL plus mixed files, Wine LGPL, LLVM Apache with exception; project license remains a user decision. No implementation code imported.
 
 ## Executed prototypes
-- [R16 — Syscall User Dispatch](R16_SYSCALL_USER_DISPATCH_PROTOTYPE.md): Linux x86-64 native syscall interception **PASS** at GCC -O0/-O2/-O3. No Windows raw syscall test yet.
-- [R17 — bidirectional ABI bridge](R17_ABI_BRIDGE_EXPERIMENT.md): GCC-generated MS/SysV call signatures **PASS** at -O0/-O2/-O3. No PE execution yet.
+- [R16 — Syscall User Dispatch](R16_SYSCALL_USER_DISPATCH_PROTOTYPE.md): Linux x86-64 native syscall interception **PASS** at GCC -O0/-O2/-O3. A Windows-target PE raw syscall test is now in R26; still no real NT service mapping.
+- [R17 — bidirectional ABI bridge](R17_ABI_BRIDGE_EXPERIMENT.md): GCC-generated MS/SysV call signatures **PASS** at -O0/-O2/-O3. PE execution is now separately exercised in R19–R28.
 - [R18 — ntsync capability probe](R18_NTSYNC_ACTUAL_UAPI_TRANSITION.md): installed header detected as old, device absent, runtime test **SKIP**. Compiler-path tests verified; no ntsync benchmark.
 - [R19 — PE32+ native execution](R19_PE64_EXECUTION_EXPERIMENT.md): a Clang/LLD-built freestanding PE64 image runs in Linux at a relocated base and returns 42, **PASS** (five positive iterations, 19 negative malformed-image tests).
 - [R20 — a real PE IAT import bound to host function](R20_PE64_IAT_BRIDGE.md): a second PE64 image invokes its sole imported probe.dll!add_five via a Microsoft-ABI Linux host stub, **PASS** (five additional iterations, seven additional import rejection tests). Real Windows OS services remain unimplemented.
@@ -41,6 +41,8 @@ Read with [research plan](PLAN.md) and [architecture decisions](DECISIONS.md). F
 
 - [R26 — Windows-target PE raw syscall intercepted by SUD](R26_PE64_RAW_SYSCALL_SUD.md): PE machine code issues an NT-style syscall deliberately colliding with Linux getpid; host returns one synthetic SIGSYS result (five passes). This is NOT a working NT service table or sandbox.
 
+- [R28 — first real NTDLL export implementation](R28_NTDLL_RTL_COMPARE_MEMORY.md): independent MS-ABI RtlCompareMemory implementation verified by 8 host calls, 5 Windows-target PE imported calls, and strict import-name checks; no Windows process semantics implied.
+
 Executable sources and makefiles: [experiments](../experiments/). Command: **make -C experiments test** (check each PASS/SKIP separately).
 
 ## Additional loader research
@@ -48,7 +50,7 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
-2. Real Windows-origin raw syscall interception and correct NT-status dispatch, without accidentally entering Linux syscall services.
+2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
 3. Cross-ABI unwinding, nonvolatile vector registers, TEB GS behavior and per-thread initialization.
 4. Full ntsync runtime tests on a host with a suitable device/header/module combination.
 5. License inventory and security threat model before substantial code reuse.
