@@ -54,7 +54,7 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R37 — named pipe semantics versus AF_UNIX](R37_NAMED_PIPES_AF_UNIX_SEMANTIC_GATES.md): Windows message/byte modes, instance lifecycle, ACLs and overlapped completion are not supplied automatically by Linux sockets. Primary documentation and proposed conformance gates only; no experiment.\n\n- [R38 — registry namespace, WOW64 views and notifications](R38_REGISTRY_WOW64_NOTIFICATION_GATES.md): Microsoft primary documentation; distinguishes logical registry views, shared-key exceptions, key security, and change notification lifecycles. Conformance proposals only; no experiment.
 
-## Highest-priority untested gates
+- [R39 — Windows thread-pool callback lifetime and cleanup groups](R39_THREADPOOL_CALLBACK_LIFETIME.md): primary Microsoft API documentation; queued/running callback distinction, wait rearming, cleanup-group lifetime, and proposed Windows-reference conformance tests. No experiment.\n\n## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
 3. Cross-ABI unwinding, nonvolatile vector registers, TEB GS behavior and per-thread initialization.
