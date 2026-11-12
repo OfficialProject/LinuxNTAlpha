@@ -1,0 +1,33 @@
+name: Research experiment smoke tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux-x86_64:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout source (verified actions/checkout v4.2.2)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends clang lld gcc make python3
+      - name: Verify tools
+        run: |
+          uname -a
+          gcc --version | head -1
+          clang --version | head -1
+          lld-link --version
+          python3 --version
+      - name: Execute LinuxNTAlpha smoke tests
+        run: make -C experiments test
