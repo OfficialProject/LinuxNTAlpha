@@ -1,4 +1,4 @@
-SUBPROJECTS := abi-bridge syscall-user-dispatch ntsync-capability
+SUBPROJECTS := abi-bridge syscall-user-dispatch ntsync-capability pe64-image
 
 .PHONY: test clean
 
