@@ -32,14 +32,14 @@ The user requested **no routine progress reports**. Keep findings in GitHub; pro
 
 - Favor isolated userspace programs first. Never require root, change host kernel configuration or load a kernel module just to demonstrate a claim without appropriate approval and a controlled test host.
 - Run **make -C experiments test** for the existing smoke tests; review pass vs skip individually. These do not constitute full NT compatibility.
-- Compiler-generated Microsoft x64 ABI calls in Linux ELF (R17) prove only a narrow call bridge; a separate actual PE fixture (R19) executes natively, but lacks imports, TLS, exceptions and all Windows services.
+- Compiler-generated Microsoft x64 ABI calls in Linux ELF (R17) prove only a narrow call bridge. A real PE fixture (R19) executes natively; an imported fixture (R20) calls one allowlisted synthetic function through an IAT. Both still lack Windows operating-system services, TLS, exceptions and genuine DLL loading.
 - A Linux syscall intercepted with SUD (R16) proves only interception mechanics, not NT syscall execution or isolation.
 - An old installed ntsync UAPI header or absent /dev/ntsync (R18) is **SKIP**, not a valid kernel synchronization benchmark.
 - When adding tests, exercise boundary conditions and negative controls; add a README and a reproducible invocation.
 
 ## Current high-value research questions
 
-1. Build on the tested R19 PE64 no-import fixture: controlled IAT import resolution and stub invocation, then TLS and startup. Do not run untrusted binaries; a parser/executor is not a sandbox.
+1. Build on tested R19/R20 PE64 and one synthetic IAT import: comprehensive parse-only import test corpus, actual independently implemented Windows API semantics, then DLL loading, TLS and startup. Do not run untrusted binaries; a parser/executor is not a sandbox.
 2. System call dispatch and x64 ABI transitions: actual Windows-origin raw syscall fixture, selector rearming, thread isolation, asynchronous signals and correct NT service mapping.
 3. NT object manager, ACL/token access checks, Windows file-sharing and case-insensitive path semantics without unsafe host escapes.
 4. NTSYNC runtime validation on a kernel exposing /dev/ntsync, including wait-any/all atomicity, abandoned mutexes and APC/alertable wait limitations.
