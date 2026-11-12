@@ -32,8 +32,8 @@ The user requested **no routine progress reports**. Keep findings in GitHub; pro
 
 - Favor isolated userspace programs first. Never require root, change host kernel configuration or load a kernel module just to demonstrate a claim without appropriate approval and a controlled test host.
 - Run **make -C experiments test** for the existing smoke tests; review pass vs skip individually. These do not constitute full NT compatibility.
-- Compiler-generated Microsoft x64 ABI calls in Linux ELF (R17) prove only a narrow call bridge. A real PE fixture (R19) executes natively; an imported fixture (R20) calls one allowlisted synthetic function through an IAT. Both still lack Windows operating-system services, TLS, exceptions and genuine DLL loading.
-- A Linux syscall intercepted with SUD (R16) proves only interception mechanics, not NT syscall execution or isolation.
+- Compiler-generated Microsoft x64 ABI calls in Linux ELF (R17) prove only a narrow call bridge. A real PE fixture (R19) executes natively; an imported fixture (R20) calls one allowlisted synthetic function through an IAT. R23 added parse-only mode for hostile test mutations; require --execute-trusted-fixture explicitly for any code execution. Both still lack Windows operating-system services, TLS, exceptions and genuine DLL loading.
+- A Linux syscall intercepted with SUD (R16) proves only interception mechanics, not NT syscall execution or isolation; R22's ~1-microsecond signal cost is a microbenchmark result on one container, not an application slowdown estimate.
 - An old installed ntsync UAPI header or absent /dev/ntsync (R18) is **SKIP**, not a valid kernel synchronization benchmark.
 - When adding tests, exercise boundary conditions and negative controls; add a README and a reproducible invocation.
 
