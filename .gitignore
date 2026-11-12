@@ -3,3 +3,6 @@ experiments/abi-bridge/abi_bridge_probe
 experiments/syscall-user-dispatch/syscall_user_dispatch_probe
 experiments/ntsync-capability/ntsync_capability_probe
 *.o
+experiments/pe64-image/pe64_probe
+experiments/pe64-image/fixture.exe
+experiments/pe64-image/fixture.obj
