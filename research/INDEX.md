@@ -56,6 +56,8 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R39 — Windows thread-pool callback lifetime and cleanup groups](R39_THREADPOOL_CALLBACK_LIFETIME.md): primary Microsoft API documentation; queued/running callback distinction, wait rearming, cleanup-group lifetime, and proposed Windows-reference conformance tests. No experiment.\n\n- [R40 — Windows console event buffers versus Linux PTYs](R40_WINDOWS_CONSOLE_PTY_GATES.md): Microsoft primary documentation; distinguishes classic console input records, modes, ConPTY streams and resize lifecycle. Windows-reference conformance gates proposed; no experiment.
 
+- [R41 — vectored exception/continue handler lifecycle](R41_VECTORED_EXCEPTION_CONTINUE_GATES.md): primary Microsoft documentation; separate process-wide callback ordering, removal, and continuation from x64 unwind tables. Windows-reference conformance gates proposed; no experiment.
+
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
