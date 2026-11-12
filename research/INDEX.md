@@ -43,6 +43,9 @@ Read with [research plan](PLAN.md) and [architecture decisions](DECISIONS.md). F
 
 Executable sources and makefiles: [experiments](../experiments/). Command: **make -C experiments test** (check each PASS/SKIP separately).
 
+## Additional loader research
+- [R27 — PE32+ static TLS directory and loader lifecycle gates](R27_PE64_TLS_LOADER_GATES.md): primary-specification review only; distinguishes TLS templates/callbacks from R24/R25 synthetic GS/TIB and R20 imports. No new experiment.
+
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. Real Windows-origin raw syscall interception and correct NT-status dispatch, without accidentally entering Linux syscall services.
