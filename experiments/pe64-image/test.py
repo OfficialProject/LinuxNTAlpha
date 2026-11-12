@@ -25,12 +25,12 @@ def u32(data, at, value):
     struct.pack_into("<I", data, at, value)
 
 
-def run(data, execute=False):
+def run(data, execute=False, synthetic_gs=False):
     with tempfile.TemporaryDirectory(prefix="pe64-bad-fixture-") as directory:
         path = pathlib.Path(directory) / "test.exe"
         path.write_bytes(data)
         return subprocess.run([str(HERE / "pe64_probe"),
-                               "--execute-trusted-fixture" if execute else "--parse-only", str(path)],
+                               "--execute-synthetic-gs-fixture" if synthetic_gs else ("--execute-trusted-fixture" if execute else "--parse-only"), str(path)],
                               capture_output=True, text=True, timeout=10)
 
 
@@ -126,7 +126,7 @@ class MinimalPeLoader(unittest.TestCase):
 
 
     def test_parse_only_accepts_both_trusted_fixtures(self):
-        for file in ("fixture.exe", "import_fixture.exe"):
+        for file in ("fixture.exe", "import_fixture.exe", "gs_fixture.exe"):
             with self.subTest(file=file):
                 result = run((HERE / file).read_bytes(), execute=False)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
@@ -135,9 +135,10 @@ class MinimalPeLoader(unittest.TestCase):
 
     def test_deterministic_mutations_are_parse_only(self):
         rng = random.Random(20261112)
-        fixtures = [IMAGE, (HERE / "import_fixture.exe").read_bytes()]
+        fixtures = [IMAGE, (HERE / "import_fixture.exe").read_bytes(),
+                    (HERE / "gs_fixture.exe").read_bytes()]
         for index in range(200):
-            original = fixtures[index % 2]
+            original = fixtures[index % len(fixtures)]
             blob = bytearray(original)
             for _ in range(rng.randrange(1, 6)):
                 at = rng.randrange(len(blob))
@@ -148,6 +149,19 @@ class MinimalPeLoader(unittest.TestCase):
             self.assertIn(result.returncode, (0, 1),
                           f"case={index}: return={result.returncode} stdout={result.stdout} stderr={result.stderr}")
             self.assertNotIn("pe64_entry_return", result.stdout)
+
+
+    def test_windows_pe_reads_synthetic_gs(self):
+        image = (HERE / "gs_fixture.exe").read_bytes()
+        for iteration in range(5):
+            with self.subTest(iteration=iteration):
+                result = run(image, synthetic_gs=True)
+                if result.returncode == 77 and "SKIP: ARCH_" in result.stderr:
+                    self.skipTest("Linux ARCH_SET_GS/GET_GS unavailable")
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn("pe64_entry_return=42", result.stdout)
+                self.assertIn("imports_patched=1", result.stdout)
+                self.assertRegex(result.stdout, r"applied_dir64=[1-9][0-9]*")
 
 
 if __name__ == "__main__":
