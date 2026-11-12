@@ -11,3 +11,4 @@ experiments/pe64-image/probe.dll
 experiments/pe64-image/probe.lib
 experiments/pe64-image/probe.exp
 experiments/sud-latency/sud_latency
+experiments/gs-teb-probe/gs_teb_probe
