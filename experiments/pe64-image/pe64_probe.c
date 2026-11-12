@@ -27,6 +27,8 @@
 #define MEM_READ UINT32_C(0x40000000)
 #define MEM_WRITE UINT32_C(0x80000000)
 #define BASERELOC_INDEX 5U
+#define IMPORT_INDEX 1U
+#define IAT_INDEX 12U
 #define IMAGE_REL_BASED_DIR64 10U
 #define IMAGE_REL_BASED_ABSOLUTE 0U
 
@@ -94,6 +96,53 @@ static bool rva_has_data(const struct section *s, size_t count,
     return false;
 }
 
+/* The only allowed import is the fixture's synthetic ABI-correct function. */
+static __attribute__((ms_abi, noinline)) int host_add_five(int value) {
+    return value + 5;
+}
+static bool image_name_equals(const uint8_t *image, size_t image_size,
+                              const struct section *sections, size_t count,
+                              uint32_t rva, const char *expected) {
+    size_t n = strlen(expected) + 1;
+    return bounds(rva, n, image_size) &&
+           rva_has_data(sections, count, rva, n) &&
+           memcmp(image + rva, expected, n) == 0;
+}
+static bool patch_one_import(uint8_t *image, size_t image_size,
+                             const struct section *sections, size_t section_count,
+                             uint32_t import_rva, uint32_t import_size,
+                             uint32_t iat_rva, uint32_t iat_size,
+                             size_t *patched) {
+    /* 20-byte descriptor + 20-byte null terminator. */
+    if (import_size != 40 || iat_size != 16 ||
+        !bounds(import_rva, import_size, image_size) ||
+        !rva_has_data(sections, section_count, import_rva, import_size) ||
+        !bounds(iat_rva, iat_size, image_size) ||
+        !rva_has_data(sections, section_count, iat_rva, iat_size) ||
+        u64(image + iat_rva + 8) != 0) return false;
+    const uint8_t *imp = image + import_rva;
+    uint32_t lookup_rva = u32(imp);
+    uint32_t dll_rva = u32(imp + 12);
+    uint32_t destination_rva = u32(imp + 16);
+    if (!lookup_rva || !dll_rva || destination_rva != iat_rva ||
+        u32(imp + 4) || u32(imp + 8) ||
+        memcmp(imp + 20, (const unsigned char[20]){0}, 20) != 0 ||
+        !image_name_equals(image, image_size, sections, section_count, dll_rva, "probe.dll") ||
+        !bounds(lookup_rva, 16, image_size) ||
+        !rva_has_data(sections, section_count, lookup_rva, 16)) return false;
+    uint64_t name_value = u64(image + lookup_rva);
+    if (name_value > UINT32_MAX || name_value == 0 ||
+        u64(image + lookup_rva + 8) != 0 ||
+        !bounds((uint32_t)name_value, 2, image_size) ||
+        !rva_has_data(sections, section_count, (uint32_t)name_value, 2)) return false;
+    uint32_t name_rva = (uint32_t)name_value + 2;
+    if (!image_name_equals(image, image_size, sections, section_count,
+                           name_rva, "add_five")) return false;
+    store64(image + iat_rva, (uint64_t)(uintptr_t)&host_add_five);
+    *patched = 1;
+    return true;
+}
+
 static int execute(const uint8_t *file, size_t file_len, size_t page_size) {
     if (file_len < 64 || u16(file) != 0x5a4d)
         return reject("DOS MZ signature missing");
@@ -130,12 +179,19 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size) {
         return reject("unsupported alignment, image/header size, entry or directory count");
 
     uint32_t reloc_rva = 0, reloc_len = 0;
+    uint32_t import_rva = 0, import_len = 0, iat_rva = 0, iat_len = 0;
     for (unsigned i = 0; i < dir_count; ++i) {
         uint32_t rva = u32(file + opt + 112 + (size_t)i * 8);
         uint32_t n = u32(file + opt + 116 + (size_t)i * 8);
         if (i == BASERELOC_INDEX) { reloc_rva = rva; reloc_len = n; }
-        else if (rva || n) return reject("imports, TLS, exceptions, CLR or other directories unsupported");
+        else if (i == IMPORT_INDEX) { import_rva = rva; import_len = n; }
+        else if (i == IAT_INDEX) { iat_rva = rva; iat_len = n; }
+        else if (rva || n) return reject("unsupported data directory (TLS, exceptions, CLR, etc.)");
     }
+    if ((import_rva == 0) != (import_len == 0) ||
+        (iat_rva == 0) != (iat_len == 0) ||
+        (import_rva == 0) != (iat_rva == 0))
+        return reject("incomplete import or IAT directory");
     if (!reloc_rva || reloc_len < 8 || !bounds(reloc_rva, reloc_len, image_size))
         return reject("image must contain a well-formed base-relocation directory");
 
@@ -216,6 +272,13 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size) {
         munmap(image, image_size); free(sections);
         return reject("invalid or empty DIR64 relocation entries");
     }
+    size_t imports_patched = 0;
+    if (import_rva && !patch_one_import(image, image_size, sections, sections_count,
+                                        import_rva, import_len, iat_rva, iat_len,
+                                        &imports_patched)) {
+        munmap(image, image_size); free(sections);
+        return reject("only probe.dll!add_five is a supported import");
+    }
 
     /* Eliminate transient write+execute mappings before entering fixture code. */
     if (mprotect(image, image_size, PROT_NONE)) {
@@ -238,9 +301,9 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size) {
     typedef int (__attribute__((ms_abi)) *win_entry_fn)(void);
     win_entry_fn fn = (win_entry_fn)(void *)(image + entry);
     int result = fn();
-    printf("pe64_entry_return=%d applied_dir64=%zu image_size=%" PRIu32
+    printf("pe64_entry_return=%d applied_dir64=%zu imports_patched=%zu image_size=%" PRIu32
            " actual_base=%p preferred_base=0x%" PRIx64 "\n",
-           result, changed, image_size, (void *)image, preferred_base);
+           result, changed, imports_patched, image_size, (void *)image, preferred_base);
     munmap(image, image_size);
     free(sections);
     return result == 42 ? 0 : reject("entry returned unexpected value");
