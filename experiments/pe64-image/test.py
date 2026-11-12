@@ -125,7 +125,7 @@ class MinimalPeLoader(unittest.TestCase):
                 self.assertIn("REJECT:", result.stderr)
 
 
-    def test_parse_only_accepts_both_trusted_fixtures(self):
+    def test_parse_only_accepts_trusted_fixtures(self):
         for file in ("fixture.exe", "import_fixture.exe", "gs_fixture.exe"):
             with self.subTest(file=file):
                 result = run((HERE / file).read_bytes(), execute=False)
