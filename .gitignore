@@ -6,3 +6,7 @@ experiments/ntsync-capability/ntsync_capability_probe
 experiments/pe64-image/pe64_probe
 experiments/pe64-image/fixture.exe
 experiments/pe64-image/fixture.obj
+experiments/pe64-image/import_fixture.exe
+experiments/pe64-image/probe.dll
+experiments/pe64-image/probe.lib
+experiments/pe64-image/probe.exp
