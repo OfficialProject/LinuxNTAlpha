@@ -1,0 +1,14 @@
+SUBPROJECTS := abi-bridge syscall-user-dispatch ntsync-capability
+
+.PHONY: test clean
+
+test:
+	@set -e; for project in $(SUBPROJECTS); do \
+		echo "=== $$project ==="; \
+		$(MAKE) -C "$$project" test; \
+	done
+
+clean:
+	@set -e; for project in $(SUBPROJECTS); do \
+		$(MAKE) -C "$$project" clean; \
+	done
