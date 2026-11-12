@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <asm/prctl.h>
+#include <stddef.h>
+#include <sys/syscall.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -143,7 +146,38 @@ static bool patch_one_import(uint8_t *image, size_t image_size,
     return true;
 }
 
-static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool run_code) {
+typedef int (__attribute__((ms_abi)) *win_entry_fn)(void);
+struct synthetic_gs_tib {
+    uintptr_t unused[6];
+    struct synthetic_gs_tib *self;
+    uint64_t cookie;
+};
+_Static_assert(offsetof(struct synthetic_gs_tib, self) == 0x30,
+               "synthetic x64 TIB self pointer offset");
+
+static int call_entry(win_entry_fn fn, bool inject_gs, int *result) {
+    if (!inject_gs) { *result = fn(); return 0; }
+    unsigned long old_gs = 0;
+    if (syscall(SYS_arch_prctl, ARCH_GET_GS, &old_gs) != 0) {
+        fprintf(stderr, "SKIP: ARCH_GET_GS unavailable: %s\n", strerror(errno));
+        return 77;
+    }
+    struct synthetic_gs_tib tib = {0};
+    tib.self = &tib;
+    tib.cookie = UINT64_C(0x1234abcd5678ef00);
+    if (syscall(SYS_arch_prctl, ARCH_SET_GS, (unsigned long)(uintptr_t)&tib) != 0) {
+        fprintf(stderr, "SKIP: ARCH_SET_GS unavailable: %s\n", strerror(errno));
+        return 77;
+    }
+    *result = fn();
+    if (syscall(SYS_arch_prctl, ARCH_SET_GS, old_gs) != 0) {
+        perror("FATAL: could not restore GS");
+        return 1;
+    }
+    return 0;
+}
+
+static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool run_code, bool inject_gs) {
     if (file_len < 64 || u16(file) != 0x5a4d)
         return reject("DOS MZ signature missing");
     size_t pe = u32(file + 0x3c);
@@ -300,9 +334,9 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool 
     }
     int result = 0;
     if (run_code) {
-        typedef int (__attribute__((ms_abi)) *win_entry_fn)(void);
         win_entry_fn fn = (win_entry_fn)(void *)(image + entry);
-        result = fn();
+        int call_status = call_entry(fn, inject_gs, &result);
+        if (call_status) { munmap(image, image_size); free(sections); return call_status; }
         printf("pe64_entry_return=%d applied_dir64=%zu imports_patched=%zu image_size=%" PRIu32
                " actual_base=%p preferred_base=0x%" PRIx64 "\n",
                result, changed, imports_patched, image_size, (void *)image, preferred_base);
@@ -317,8 +351,9 @@ static int execute(const uint8_t *file, size_t file_len, size_t page_size, bool 
 
 int main(int argc, char **argv) {
     if (argc != 3 || (strcmp(argv[1], "--parse-only") != 0 &&
-                      strcmp(argv[1], "--execute-trusted-fixture") != 0)) {
-        fprintf(stderr, "usage: %s {--parse-only|--execute-trusted-fixture} file.exe\n", argv[0]);
+                      strcmp(argv[1], "--execute-trusted-fixture") != 0 &&
+                      strcmp(argv[1], "--execute-synthetic-gs-fixture") != 0)) {
+        fprintf(stderr, "usage: %s {--parse-only|--execute-trusted-fixture|--execute-synthetic-gs-fixture} file.exe\n", argv[0]);
         return 2;
     }
     long p = sysconf(_SC_PAGESIZE);
@@ -326,7 +361,9 @@ int main(int argc, char **argv) {
     uint8_t *file = NULL;
     size_t len = 0;
     if (read_file(argv[2], &file, &len)) return 1;
-    int status = execute(file, len, (size_t)p, strcmp(argv[1], "--execute-trusted-fixture") == 0);
+    int status = execute(file, len, (size_t)p,
+                         strcmp(argv[1], "--parse-only") != 0,
+                         strcmp(argv[1], "--execute-synthetic-gs-fixture") == 0);
     free(file);
     return status;
 }
