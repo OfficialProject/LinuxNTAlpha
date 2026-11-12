@@ -50,7 +50,7 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R29 — API-set contract resolution and delay-import gates](R29_API_SET_DELAY_IMPORT_GATES.md): Microsoft primary documentation; no experiment. Contract names are not physical DLL paths, and delay imports have separate descriptors and failure timing.
 
-## Highest-priority untested gates
+- [R30 — x64 static unwind metadata versus dynamic function-table registration](R30_X64_UNWIND_TABLE_REGISTRATION.md): Microsoft primary documentation; parse-only validation and Windows-reference conformance gates proposed, no experiment.\n\n## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
 3. Cross-ABI unwinding, nonvolatile vector registers, TEB GS behavior and per-thread initialization.
