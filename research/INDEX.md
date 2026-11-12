@@ -48,6 +48,8 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 ## Additional loader research
 - [R27 — PE32+ static TLS directory and loader lifecycle gates](R27_PE64_TLS_LOADER_GATES.md): primary-specification review only; distinguishes TLS templates/callbacks from R24/R25 synthetic GS/TIB and R20 imports. No new experiment.
 
+- [R29 — API-set contract resolution and delay-import gates](R29_API_SET_DELAY_IMPORT_GATES.md): Microsoft primary documentation; no experiment. Contract names are not physical DLL paths, and delay imports have separate descriptors and failure timing.
+
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
