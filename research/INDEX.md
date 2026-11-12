@@ -37,6 +37,8 @@ Read with [research plan](PLAN.md) and [architecture decisions](DECISIONS.md). F
 
 - [R24 — GS-based synthetic TIB concurrency](R24_GS_TEB_CONTEXT.md): four pthreads read distinct GS:0x30 and signal context while native Linux FS TLS stays intact (128 signals, GCC optimizations and sanitizer local tests). No real Windows TEB initialized.
 
+- [R25 — real Windows-target PE reads synthetic GS TIB](R25_PE64_GS_TIB_EXECUTION.md): 5 successful PE entry calls that read GS:0x30 and call one imported Linux MS-ABI stub; no actual Windows TEB/PEB or kernel services.
+
 Executable sources and makefiles: [experiments](../experiments/). Command: **make -C experiments test** (check each PASS/SKIP separately).
 
 ## Highest-priority untested gates
