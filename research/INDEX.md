@@ -32,6 +32,8 @@ Read with [research plan](PLAN.md) and [architecture decisions](DECISIONS.md). F
 - [R19 — PE32+ native execution](R19_PE64_EXECUTION_EXPERIMENT.md): a Clang/LLD-built freestanding PE64 image runs in Linux at a relocated base and returns 42, **PASS** (five positive iterations, 19 negative malformed-image tests).
 - [R20 — a real PE IAT import bound to host function](R20_PE64_IAT_BRIDGE.md): a second PE64 image invokes its sole imported probe.dll!add_five via a Microsoft-ABI Linux host stub, **PASS** (five additional iterations, seven additional import rejection tests). Real Windows OS services remain unimplemented.
 
+- [R22 — exploratory SUD trap latency](R22_SYSCALL_DISPATCH_LATENCY.md): 7-batch microbenchmark, pinned CPU in one container; 20000-iteration median batch averages ~72 ns allowed vs ~1032 ns SIGSYS interception. These are NOT real-app slowdowns or p99 values.
+
 Executable sources and makefiles: [experiments](../experiments/). Command: **make -C experiments test** (check each PASS/SKIP separately).
 
 ## Highest-priority untested gates
