@@ -1,0 +1,5 @@
+# Local research build products
+experiments/abi-bridge/abi_bridge_probe
+experiments/syscall-user-dispatch/syscall_user_dispatch_probe
+experiments/ntsync-capability/ntsync_capability_probe
+*.o
