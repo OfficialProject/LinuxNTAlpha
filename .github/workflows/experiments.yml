@@ -3,7 +3,13 @@ name: Research experiment smoke tests
 on:
   push:
     branches: [main]
+    paths:
+      - 'experiments/**'
+      - '.github/workflows/experiments.yml'
   pull_request:
+    paths:
+      - 'experiments/**'
+      - '.github/workflows/experiments.yml'
   workflow_dispatch:
 
 permissions:
