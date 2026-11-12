@@ -15,6 +15,8 @@ Phase R0: research, architectural evaluation, licensing, and reproducible experi
 
 See [research plan](research/PLAN.md), [initial findings](research/INITIAL_FINDINGS.md), and [decision log](research/DECISIONS.md).
 
+For the full evidence trail, see [research index](research/INDEX.md). The [experiment suite](experiments/) has executable, intentionally narrow probes for syscall interception, MS/SysV ABI calls, and ntsync UAPI/device capability. On x86-64 Linux with a C toolchain run **make -C experiments test**; read each result for **PASS** versus **SKIP**. The ntsync runtime test was unavailable in the initial container, so no ntsync kernel benchmark or full NT execution claim has been made.
+
 ## Principles
 1. Measure before optimizing. Compare against Linux and Windows baselines on equivalent hardware.
 2. Research existing code before writing replacements; respect licenses.
