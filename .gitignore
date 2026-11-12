@@ -14,3 +14,5 @@ experiments/sud-latency/sud_latency
 experiments/gs-teb-probe/gs_teb_probe
 experiments/pe64-image/gs_fixture.exe
 experiments/pe64-image/gs_fixture.obj
+experiments/pe64-image/sud_fixture.exe
+experiments/pe64-image/sud_fixture.obj
