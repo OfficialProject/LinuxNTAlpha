@@ -25,12 +25,12 @@ def u32(data, at, value):
     struct.pack_into("<I", data, at, value)
 
 
-def run(data, execute=False, synthetic_gs=False):
+def run(data, execute=False, synthetic_gs=False, synthetic_sud=False):
     with tempfile.TemporaryDirectory(prefix="pe64-bad-fixture-") as directory:
         path = pathlib.Path(directory) / "test.exe"
         path.write_bytes(data)
         return subprocess.run([str(HERE / "pe64_probe"),
-                               "--execute-synthetic-gs-fixture" if synthetic_gs else ("--execute-trusted-fixture" if execute else "--parse-only"), str(path)],
+                               "--execute-synthetic-sud-fixture" if synthetic_sud else ("--execute-synthetic-gs-fixture" if synthetic_gs else ("--execute-trusted-fixture" if execute else "--parse-only")), str(path)],
                               capture_output=True, text=True, timeout=10)
 
 
@@ -126,7 +126,7 @@ class MinimalPeLoader(unittest.TestCase):
 
 
     def test_parse_only_accepts_trusted_fixtures(self):
-        for file in ("fixture.exe", "import_fixture.exe", "gs_fixture.exe"):
+        for file in ("fixture.exe", "import_fixture.exe", "gs_fixture.exe", "sud_fixture.exe"):
             with self.subTest(file=file):
                 result = run((HERE / file).read_bytes(), execute=False)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
@@ -136,7 +136,8 @@ class MinimalPeLoader(unittest.TestCase):
     def test_deterministic_mutations_are_parse_only(self):
         rng = random.Random(20261112)
         fixtures = [IMAGE, (HERE / "import_fixture.exe").read_bytes(),
-                    (HERE / "gs_fixture.exe").read_bytes()]
+                    (HERE / "gs_fixture.exe").read_bytes(),
+                    (HERE / "sud_fixture.exe").read_bytes()]
         for index in range(200):
             original = fixtures[index % len(fixtures)]
             blob = bytearray(original)
@@ -161,6 +162,19 @@ class MinimalPeLoader(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
                 self.assertIn("pe64_entry_return=42", result.stdout)
                 self.assertIn("imports_patched=1", result.stdout)
+                self.assertRegex(result.stdout, r"applied_dir64=[1-9][0-9]*")
+
+
+    def test_windows_pe_syscall_must_be_intercepted(self):
+        image = (HERE / "sud_fixture.exe").read_bytes()
+        for iteration in range(5):
+            with self.subTest(iteration=iteration):
+                result = run(image, synthetic_sud=True)
+                if result.returncode == 77 and "SKIP: SUD" in result.stderr:
+                    self.skipTest("Linux Syscall User Dispatch unavailable")
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn("pe64_entry_return=42", result.stdout)
+                self.assertIn("sud_traps=1 unexpected=0 observed_service=39", result.stdout)
                 self.assertRegex(result.stdout, r"applied_dir64=[1-9][0-9]*")
 
 
