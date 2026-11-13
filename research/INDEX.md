@@ -90,3 +90,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R56 — NT directory enumeration state and Linux getdents boundaries](R56_DIRECTORY_ENUMERATION_GATES.md): Microsoft/Linux primary documentation; query cursor, search expression, information-class packing and mutation conformance gates. No experiment.
 
 - [R57 — Windows byte-range locks versus Linux OFD locks](R57_BYTE_RANGE_LOCKS_OFD_GATES.md): Microsoft and Linux primary-source review of lock ownership, same-handle overlap, mandatory I/O enforcement, asynchronous completion and proposed Windows/Linux differential gates. No experiment.
+
+- [R58 — Windows directory change notifications versus inotify](R58_DIRECTORY_CHANGE_NOTIFICATIONS.md): primary Microsoft/Linux documentation; distinguishes Windows handle-scoped buffering, subtree coverage, overflow and asynchronous completion from Linux nonrecursive watches and event loss. Reference conformance gates proposed; no experiment.
