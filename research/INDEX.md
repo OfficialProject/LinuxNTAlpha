@@ -75,6 +75,9 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R52 — NTSTATUS, Win32 last-error and HRESULT boundaries](R52_NTSTATUS_LAST_ERROR_HRESULT_BOUNDARIES.md): primary Microsoft API contracts, per-thread error state and explicit conversion boundaries; proposed Windows-reference tests only, no experiment.\n\n- [R53 — placeholder VM reservation, split/coalesce and mapped-view replacement](R53_PLACEHOLDER_VM_REPLACEMENT.md): Microsoft VirtualAlloc2/MapViewOfFile3/VirtualFree/UnmapViewOfFile2 contracts; identifies address-ownership and MAP_FIXED race hazards in a prospective Linux backend. Reference tests proposed; no experiment.
 
+
+- [R54 — WaitOnAddress versus Linux futex conformance](R54_WAIT_ON_ADDRESS_FUTEX_GATES.md): Windows 1/2/4/8-byte address comparison versus Linux 32-bit futex, lost-wakeup races, wake targeting, timeout and error translation; proposed differential tests only, no experiment.
+
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
