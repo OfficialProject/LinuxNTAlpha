@@ -102,3 +102,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R62 — Windows file timestamps versus Linux inode clocks](R62_FILE_TIMESTAMP_SEMANTICS.md): Microsoft/Linux primary-source analysis of four Windows file times, Linux birth/status-change clocks, setter gaps and proposed differential conformance tests. No experiment.
 
 - [R63 — Windows case-sensitive directory lookup versus Linux pathname resolution](R63_CASE_SENSITIVE_DIRECTORY_LOOKUP.md): Microsoft and Linux primary documentation; separates Windows per-directory case policy from Linux path confinement, with collision/race and reference conformance gates. No experiment.
+
+- [R64 — DLL dependency graph identity, publication and rollback](R64_DLL_DEPENDENCY_GRAPH_LIFECYCLE.md): Microsoft primary-source analysis of loaded-module identity, shared dependencies, attach failures, and proposed nonexecuting graph plus Windows differential gates. No experiment.
