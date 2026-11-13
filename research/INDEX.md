@@ -78,7 +78,7 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R54 — WaitOnAddress versus Linux futex conformance](R54_WAIT_ON_ADDRESS_FUTEX_GATES.md): Windows 1/2/4/8-byte address comparison versus Linux 32-bit futex, lost-wakeup races, wake targeting, timeout and error translation; proposed differential tests only, no experiment.
 
-## Highest-priority untested gates
+- [R55 — cross-ABI SIMD preservation and unwind gates](R55_CROSS_ABI_SIMD_PRESERVATION_GATES.md): Microsoft/GCC primary-source review of XMM6–XMM15 preservation, callbacks and unwind obligations; PE fixture and differential tests proposed, not executed.\n\n## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
 3. Cross-ABI unwinding, nonvolatile vector registers, TEB GS behavior and per-thread initialization.
