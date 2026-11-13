@@ -61,6 +61,8 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R42 — thread suspension, resume counts and context APIs](R42_THREAD_SUSPEND_CONTEXT_GATES.md): Microsoft primary API contracts; separate logical suspend counts and x64 context fidelity from Linux thread signals. Proposed Windows-reference tests only; no experiment.
 
+- [R43 — asynchronous I/O cancellation and completion suppression](R43_ASYNC_IO_CANCELLATION_COMPLETION.md): Microsoft primary API contracts distinguish cancellation request from terminal completion, IOCP packet suppression, and failed dequeue status. Proposed reference tests only; no experiment.
+
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
