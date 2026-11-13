@@ -63,6 +63,8 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R43 — asynchronous I/O cancellation and completion suppression](R43_ASYNC_IO_CANCELLATION_COMPLETION.md): Microsoft primary API contracts distinguish cancellation request from terminal completion, IOCP packet suppression, and failed dequeue status. Proposed reference tests only; no experiment.
 
+- [R44 — PE32+ ordinary import parser bounds and structural acceptance](R44_PE64_IMPORT_PARSER_BOUNDARIES.md): Microsoft PE-format-based strict parse-only contract, including multi-descriptor bounds, lookup/IAT separation, and proposed Windows differential gates. No new experiment.
+
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
