@@ -70,6 +70,9 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R50 — file rename replacement and POSIX opt-in semantics](R50_FILE_RENAME_REPLACEMENT_GATES.md): Microsoft primary Win32/driver/MS-FSCC contracts; separates legacy replacement from EX POSIX replacement, open-handle identity, and Linux backend race/isolation gates. No experiment.
 
+
+- [R51 — PE export forwarders, ordinals and resolution boundaries](R51_PE_EXPORT_FORWARDERS_RESOLUTION.md): Microsoft PE-format and GetProcAddress documentation; distinguishes EAT/name/ordinal indexing, forwarder chains and API-set boundaries. Parse-only and Windows-reference gates proposed; no experiment.
+
 ## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
