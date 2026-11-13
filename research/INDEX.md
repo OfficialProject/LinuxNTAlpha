@@ -96,3 +96,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R59 — image-section mapping and copy-on-write gates](R59_IMAGE_SECTION_COW_GATES.md): Microsoft/Linux primary-source contracts distinguish SEC_IMAGE protections, SEC_IMAGE_NO_EXECUTE, FILE_MAP_COPY commit accounting, and Linux MAP_PRIVATE. Differential conformance plan only; no experiment.
 
 - [R60 — reparse points and Linux openat2 path confinement](R60_REPARSE_POINTS_OPENAT2_BOUNDARIES.md): primary Microsoft/Linux documentation distinguishes reparse tags and open-the-link semantics from Linux symlinks and host path resolution. Proposes differential Windows and adversarial Linux gates; no experiment.
+
+- [R61 — Windows file identity, hard links and Linux inode mapping](R61_FILE_IDENTITY_HARDLINK_INODE_GATES.md): Microsoft/Linux primary documentation; distinguishes volume-scoped Windows 128-bit IDs from filesystem-scoped Linux inodes, with proposed cross-alias and lifetime conformance tests. No experiment.
