@@ -73,7 +73,9 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 
 - [R51 — PE export forwarders, ordinals and resolution boundaries](R51_PE_EXPORT_FORWARDERS_RESOLUTION.md): Microsoft PE-format and GetProcAddress documentation; distinguishes EAT/name/ordinal indexing, forwarder chains and API-set boundaries. Parse-only and Windows-reference gates proposed; no experiment.
 
-- [R52 — NTSTATUS, Win32 last-error and HRESULT boundaries](R52_NTSTATUS_LAST_ERROR_HRESULT_BOUNDARIES.md): primary Microsoft API contracts, per-thread error state and explicit conversion boundaries; proposed Windows-reference tests only, no experiment.\n\n## Highest-priority untested gates
+- [R52 — NTSTATUS, Win32 last-error and HRESULT boundaries](R52_NTSTATUS_LAST_ERROR_HRESULT_BOUNDARIES.md): primary Microsoft API contracts, per-thread error state and explicit conversion boundaries; proposed Windows-reference tests only, no experiment.\n\n- [R53 — placeholder VM reservation, split/coalesce and mapped-view replacement](R53_PLACEHOLDER_VM_REPLACEMENT.md): Microsoft VirtualAlloc2/MapViewOfFile3/VirtualFree/UnmapViewOfFile2 contracts; identifies address-ownership and MAP_FIXED race hazards in a prospective Linux backend. Reference tests proposed; no experiment.
+
+## Highest-priority untested gates
 1. Expand R20 to parse and inspect multiple IAT descriptors safely without execution; then independently implement and conformance-test real Win32/NT APIs, DLL loading and TLS.
 2. R26 traps one Windows-origin syscall; implement repeated NT-origin call dispatch, correct NTSTATUS handling and selector rearming across transitions without allowing unintended Linux syscalls.
 3. Cross-ABI unwinding, nonvolatile vector registers, TEB GS behavior and per-thread initialization.
