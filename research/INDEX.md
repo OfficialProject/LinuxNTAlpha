@@ -94,3 +94,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R58 — Windows directory change notifications versus inotify](R58_DIRECTORY_CHANGE_NOTIFICATIONS.md): primary Microsoft/Linux documentation; distinguishes Windows handle-scoped buffering, subtree coverage, overflow and asynchronous completion from Linux nonrecursive watches and event loss. Reference conformance gates proposed; no experiment.
 
 - [R59 — image-section mapping and copy-on-write gates](R59_IMAGE_SECTION_COW_GATES.md): Microsoft/Linux primary-source contracts distinguish SEC_IMAGE protections, SEC_IMAGE_NO_EXECUTE, FILE_MAP_COPY commit accounting, and Linux MAP_PRIVATE. Differential conformance plan only; no experiment.
+
+- [R60 — reparse points and Linux openat2 path confinement](R60_REPARSE_POINTS_OPENAT2_BOUNDARIES.md): primary Microsoft/Linux documentation distinguishes reparse tags and open-the-link semantics from Linux symlinks and host path resolution. Proposes differential Windows and adversarial Linux gates; no experiment.
