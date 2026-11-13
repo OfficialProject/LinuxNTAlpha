@@ -86,3 +86,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 5. License inventory and security threat model before substantial code reuse.
 
 **Not claimed:** Windows app compatibility, working NT subsystem, performance superiority, anti-cheat support, Windows driver support or a functioning operating system. Those require separate conformance evidence.
+
+- [R56 — NT directory enumeration state and Linux getdents boundaries](R56_DIRECTORY_ENUMERATION_GATES.md): Microsoft/Linux primary documentation; query cursor, search expression, information-class packing and mutation conformance gates. No experiment.
