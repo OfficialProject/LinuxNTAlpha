@@ -100,3 +100,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R61 — Windows file identity, hard links and Linux inode mapping](R61_FILE_IDENTITY_HARDLINK_INODE_GATES.md): Microsoft/Linux primary documentation; distinguishes volume-scoped Windows 128-bit IDs from filesystem-scoped Linux inodes, with proposed cross-alias and lifetime conformance tests. No experiment.
 
 - [R62 — Windows file timestamps versus Linux inode clocks](R62_FILE_TIMESTAMP_SEMANTICS.md): Microsoft/Linux primary-source analysis of four Windows file times, Linux birth/status-change clocks, setter gaps and proposed differential conformance tests. No experiment.
+
+- [R63 — Windows case-sensitive directory lookup versus Linux pathname resolution](R63_CASE_SENSITIVE_DIRECTORY_LOOKUP.md): Microsoft and Linux primary documentation; separates Windows per-directory case policy from Linux path confinement, with collision/race and reference conformance gates. No experiment.
