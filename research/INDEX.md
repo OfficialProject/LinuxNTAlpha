@@ -138,3 +138,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R80 — Windows processor groups versus Linux CPU affinity](R80_PROCESSOR_GROUP_AFFINITY_GATES.md): Microsoft/Linux primary-source contracts distinguish Windows version-dependent group/primary-group identity from Linux per-thread cpumasks and cpuset intersections; reference tests proposed, not executed.
 
 - [R81 — NT thread impersonation versus Linux credentials](R81_THREAD_IMPERSONATION_HOST_CREDENTIALS.md): Microsoft/Linux primary documentation distinguishes guest effective-token selection from host UID and filesystem credential enforcement; proposes security and Windows-reference conformance gates. No experiment.
+
+- [R82 — NT keyed-event two-sided rendezvous versus Linux futex](R82_KEYED_EVENT_RENDEZVOUS.md): pinned ReactOS source audit and Linux futex contract identify release-first pairing, key identity, timeout and APC gates. Reference conformance proposed; no experiment.
