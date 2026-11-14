@@ -122,3 +122,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R72 — NT ZeroBits and address-constrained VM placement](R72_NT_ADDRESS_CONSTRAINTS_ZEROBITS.md): separates Native NT high-bit restrictions, Win32 extended address requirements and top-down allocation from Linux mmap hints; reference conformance proposed, no experiment.
 
 - [R73 — process wait objects, exit-status persistence and pidfd boundaries](R73_PROCESS_WAIT_PIDFD_EXIT_STATUS.md): Microsoft and Linux primary documentation; host pidfd/reaping is not an NT process object, and Linux wait status truncates normal exit codes. Proposed conformance tests only; no experiment.
+
+- [R74 — thread-object exit status and Linux clear-child-TID mismatch](R74_THREAD_OBJECT_EXIT_LIFETIME.md): Microsoft thread termination/handle lifetime and Linux set_tid_address documentation; durable guest-thread-object hypothesis and falsifiable gates. No experiment.
