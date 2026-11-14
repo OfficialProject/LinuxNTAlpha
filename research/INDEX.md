@@ -126,3 +126,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R74 — thread-object exit status and Linux clear-child-TID mismatch](R74_THREAD_OBJECT_EXIT_LIFETIME.md): Microsoft thread termination/handle lifetime and Linux set_tid_address documentation; durable guest-thread-object hypothesis and falsifiable gates. No experiment.
 
 - [R75 — wait-for-multiple-objects atomicity and Linux futex_waitv limits](R75_WAIT_MULTIPLE_OBJECTS_ATOMICITY.md): Microsoft/Linux primary API contracts; wait-all deferred state transitions, wait-any index selection, abandonment and alertable wait gates. Windows-reference conformance tests proposed; no experiment.
+
+- [R76 — Windows job objects versus Linux cgroup v2](R76_JOB_OBJECTS_CGROUP_V2_GATES.md): primary Microsoft and Linux v6.12 contracts distinguish NT job identity, nested membership, kill-on-close and IOCP notification semantics from cgroup resource enforcement. Reference tests proposed; no experiment.
