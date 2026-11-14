@@ -114,3 +114,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R68 — process/thread pseudo-handles and caller-relative identity](R68_PSEUDOHANDLE_CALLER_IDENTITY.md): Microsoft API contract review distinguishes caller-relative special handles from real transferable handles; no tests run.
 
 - [R69 — dynamic-code mitigation and executable-memory trust boundary](R69_DYNAMIC_CODE_MITIGATION_EXEC_MEMORY.md): Microsoft/Linux primary documentation distinguishes Windows process/thread mitigation policy from Linux mapping permissions and identifies direct-syscall bypass as an untested security gate. No experiment.
+
+- [R70 — mapped-view flush versus durable file synchronization](R70_MAPPED_VIEW_FLUSH_DURABILITY.md): Microsoft/Linux primary documentation distinguishes view writeback, metadata persistence, handle-type behavior and Linux msync/fsync guarantees. Proposes differential tests; no experiment.
