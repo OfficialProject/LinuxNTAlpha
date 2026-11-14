@@ -112,3 +112,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R67 — cross-process NT handle duplication and Linux fd boundaries](R67_CROSS_PROCESS_HANDLE_DUPLICATION.md): Microsoft/Linux primary documentation distinguishes process-relative NT handle rights, close-source failure semantics, object-type restrictions and pidfd_getfd limitations. Proposed Windows differential gates only; no experiment.
 
 - [R68 — process/thread pseudo-handles and caller-relative identity](R68_PSEUDOHANDLE_CALLER_IDENTITY.md): Microsoft API contract review distinguishes caller-relative special handles from real transferable handles; no tests run.
+
+- [R69 — dynamic-code mitigation and executable-memory trust boundary](R69_DYNAMIC_CODE_MITIGATION_EXEC_MEMORY.md): Microsoft/Linux primary documentation distinguishes Windows process/thread mitigation policy from Linux mapping permissions and identifies direct-syscall bypass as an untested security gate. No experiment.
