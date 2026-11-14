@@ -142,3 +142,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R82 — NT keyed-event two-sided rendezvous versus Linux futex](R82_KEYED_EVENT_RENDEZVOUS.md): pinned ReactOS source audit and Linux futex contract identify release-first pairing, key identity, timeout and APC gates. Reference conformance proposed; no experiment.
 
 - [R83 — Windows oplock breaks versus Linux file leases](R83_OPLOCK_LINUX_LEASE_SEMANTIC_GATES.md): Microsoft/Linux primary documentation distinguishes oplock break acknowledgment, asynchronous completion and directory support from Linux signal-driven, timeout-bounded regular-file leases. Conformance gates proposed; no experiment.
+
+- [R84 — Win32 atom table namespace and lifetime](R84_WIN32_ATOM_TABLE_NAMESPACE_LIFETIME.md): Microsoft primary API contracts distinguish local and global atom identity, case-insensitive lookup, reference counting, process-exit persistence and integer atom boundaries. Proposed Windows-reference gates only; no experiment.
