@@ -132,3 +132,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R77 — Windows process/thread priority versus Linux scheduling](R77_WINDOWS_PRIORITY_LINUX_SCHEDULER_GATES.md): Microsoft/Linux primary API references distinguish process classes, relative thread priority, background modes, dynamic boosts, and host scheduler privileges; proposes differential conformance gates. No experiment.
 
 - [R78 — Windows named-pipe instances versus Linux local IPC](R78_NAMED_PIPES_UNIX_IPC_GATES.md): Microsoft named-pipe and Linux Unix-socket primary contracts; separates per-name instances, message-read modes, connection races, overlapped completion and guest ACLs from host IPC transport. Proposed conformance gates only; no experiment.
+
+- [R79 — NTFS alternate data streams versus Linux xattrs](R79_ALTERNATE_DATA_STREAMS_XATTR_GATES.md): primary Microsoft/Linux documentation distinguishes independently addressable named data streams from bounded whole-value xattrs; proposes backend and Windows-reference conformance gates. No experiment.
