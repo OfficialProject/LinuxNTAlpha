@@ -124,3 +124,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R73 — process wait objects, exit-status persistence and pidfd boundaries](R73_PROCESS_WAIT_PIDFD_EXIT_STATUS.md): Microsoft and Linux primary documentation; host pidfd/reaping is not an NT process object, and Linux wait status truncates normal exit codes. Proposed conformance tests only; no experiment.
 
 - [R74 — thread-object exit status and Linux clear-child-TID mismatch](R74_THREAD_OBJECT_EXIT_LIFETIME.md): Microsoft thread termination/handle lifetime and Linux set_tid_address documentation; durable guest-thread-object hypothesis and falsifiable gates. No experiment.
+
+- [R75 — wait-for-multiple-objects atomicity and Linux futex_waitv limits](R75_WAIT_MULTIPLE_OBJECTS_ATOMICITY.md): Microsoft/Linux primary API contracts; wait-all deferred state transitions, wait-any index selection, abandonment and alertable wait gates. Windows-reference conformance tests proposed; no experiment.
