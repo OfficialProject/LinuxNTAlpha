@@ -120,3 +120,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R71 — Windows write-watch and Linux dirty-page tracking](R71_WRITE_WATCH_DIRTY_PAGE_TRACKING.md): Microsoft GetWriteWatch/ResetWriteWatch and Linux userfaultfd primary documentation; identifies reset races, missing-page writes and feature negotiation as conformance gates. No experiment.
 
 - [R72 — NT ZeroBits and address-constrained VM placement](R72_NT_ADDRESS_CONSTRAINTS_ZEROBITS.md): separates Native NT high-bit restrictions, Win32 extended address requirements and top-down allocation from Linux mmap hints; reference conformance proposed, no experiment.
+
+- [R73 — process wait objects, exit-status persistence and pidfd boundaries](R73_PROCESS_WAIT_PIDFD_EXIT_STATUS.md): Microsoft and Linux primary documentation; host pidfd/reaping is not an NT process object, and Linux wait status truncates normal exit codes. Proposed conformance tests only; no experiment.
