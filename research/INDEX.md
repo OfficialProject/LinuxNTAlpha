@@ -128,3 +128,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R75 — wait-for-multiple-objects atomicity and Linux futex_waitv limits](R75_WAIT_MULTIPLE_OBJECTS_ATOMICITY.md): Microsoft/Linux primary API contracts; wait-all deferred state transitions, wait-any index selection, abandonment and alertable wait gates. Windows-reference conformance tests proposed; no experiment.
 
 - [R76 — Windows job objects versus Linux cgroup v2](R76_JOB_OBJECTS_CGROUP_V2_GATES.md): primary Microsoft and Linux v6.12 contracts distinguish NT job identity, nested membership, kill-on-close and IOCP notification semantics from cgroup resource enforcement. Reference tests proposed; no experiment.
+
+- [R77 — Windows process/thread priority versus Linux scheduling](R77_WINDOWS_PRIORITY_LINUX_SCHEDULER_GATES.md): Microsoft/Linux primary API references distinguish process classes, relative thread priority, background modes, dynamic boosts, and host scheduler privileges; proposes differential conformance gates. No experiment.
