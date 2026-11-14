@@ -140,3 +140,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R81 — NT thread impersonation versus Linux credentials](R81_THREAD_IMPERSONATION_HOST_CREDENTIALS.md): Microsoft/Linux primary documentation distinguishes guest effective-token selection from host UID and filesystem credential enforcement; proposes security and Windows-reference conformance gates. No experiment.
 
 - [R82 — NT keyed-event two-sided rendezvous versus Linux futex](R82_KEYED_EVENT_RENDEZVOUS.md): pinned ReactOS source audit and Linux futex contract identify release-first pairing, key identity, timeout and APC gates. Reference conformance proposed; no experiment.
+
+- [R83 — Windows oplock breaks versus Linux file leases](R83_OPLOCK_LINUX_LEASE_SEMANTIC_GATES.md): Microsoft/Linux primary documentation distinguishes oplock break acknowledgment, asynchronous completion and directory support from Linux signal-driven, timeout-bounded regular-file leases. Conformance gates proposed; no experiment.
