@@ -130,3 +130,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R76 — Windows job objects versus Linux cgroup v2](R76_JOB_OBJECTS_CGROUP_V2_GATES.md): primary Microsoft and Linux v6.12 contracts distinguish NT job identity, nested membership, kill-on-close and IOCP notification semantics from cgroup resource enforcement. Reference tests proposed; no experiment.
 
 - [R77 — Windows process/thread priority versus Linux scheduling](R77_WINDOWS_PRIORITY_LINUX_SCHEDULER_GATES.md): Microsoft/Linux primary API references distinguish process classes, relative thread priority, background modes, dynamic boosts, and host scheduler privileges; proposes differential conformance gates. No experiment.
+
+- [R78 — Windows named-pipe instances versus Linux local IPC](R78_NAMED_PIPES_UNIX_IPC_GATES.md): Microsoft named-pipe and Linux Unix-socket primary contracts; separates per-name instances, message-read modes, connection races, overlapped completion and guest ACLs from host IPC transport. Proposed conformance gates only; no experiment.
