@@ -106,3 +106,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R64 — DLL dependency graph identity, publication and rollback](R64_DLL_DEPENDENCY_GRAPH_LIFECYCLE.md): Microsoft primary-source analysis of loaded-module identity, shared dependencies, attach failures, and proposed nonexecuting graph plus Windows differential gates. No experiment.
 
 - [R65 — Windows stack growth, guard faults, and Linux signal delivery](R65_STACK_GUARD_GROWTH_GATES.md): primary Microsoft/Linux documentation distinguishes reserved/committed stack pages, one-shot guard faults, stack-overflow recovery and Linux alternate signal stacks. Proposes Windows-reference and isolated Linux conformance gates; no experiment.
+
+- [R66 — IOCP batched dequeue and alertable-wait gates](R66_IOCP_BATCHED_ALERTABLE_DEQUEUE.md): Microsoft/Linux primary documentation distinguishes batched port packets, APC interruption and io_uring CQEs; proposes Windows-reference and isolated state-machine tests. No experiment.
