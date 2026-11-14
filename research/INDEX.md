@@ -118,3 +118,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R70 — mapped-view flush versus durable file synchronization](R70_MAPPED_VIEW_FLUSH_DURABILITY.md): Microsoft/Linux primary documentation distinguishes view writeback, metadata persistence, handle-type behavior and Linux msync/fsync guarantees. Proposes differential tests; no experiment.
 
 - [R71 — Windows write-watch and Linux dirty-page tracking](R71_WRITE_WATCH_DIRTY_PAGE_TRACKING.md): Microsoft GetWriteWatch/ResetWriteWatch and Linux userfaultfd primary documentation; identifies reset races, missing-page writes and feature negotiation as conformance gates. No experiment.
+
+- [R72 — NT ZeroBits and address-constrained VM placement](R72_NT_ADDRESS_CONSTRAINTS_ZEROBITS.md): separates Native NT high-bit restrictions, Win32 extended address requirements and top-down allocation from Linux mmap hints; reference conformance proposed, no experiment.
