@@ -184,3 +184,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R103 — Windows CPU Sets versus Linux thread affinity](R103_CPU_SETS_AFFINITY_GATES.md): Microsoft CPU Set precedence, process-default versus thread-selected policy and processor groups contrasted with Linux per-thread affinity and cpuset restrictions. Differential conformance proposed; no experiment.
 
 - [R104 — Windows timer-resolution policy versus Linux timer scheduling](R104_TIMER_RESOLUTION_WAITABLE_TIMER_GATES.md): Microsoft Windows 10/11 timeBeginPeriod policy, waitable timer signaling/APCs and Linux timer slack/timerfd contracts; proposes cross-version differential and wakeup/power gates. No experiment.
+
+- [R105 — pagefile-backed section commitment versus Linux overcommit](R105_SECTION_COMMIT_OVERCOMMIT_GATES.md): Microsoft SEC_COMMIT/SEC_RESERVE accounting and section lifetime contrasted with Linux mmap/MAP_NORESERVE and host overcommit policy; cross-process and failure-path conformance proposed, no experiment.
