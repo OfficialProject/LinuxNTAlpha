@@ -188,3 +188,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R105 — pagefile-backed section commitment versus Linux overcommit](R105_SECTION_COMMIT_OVERCOMMIT_GATES.md): Microsoft SEC_COMMIT/SEC_RESERVE accounting and section lifetime contrasted with Linux mmap/MAP_NORESERVE and host overcommit policy; cross-process and failure-path conformance proposed, no experiment.
 
 - [R106 — SxS activation-context and manifest-directed binding](R106_SXS_ACTIVATION_CONTEXT_BINDING.md): Microsoft primary contracts distinguish per-thread activation stacks, manifest resolution and SxS redirects from ordinary DLL search; proposes Windows-reference, lifetime and security gates. No experiment.
+
+- [R107 — bound-import pointer provenance and loader trust boundary](R107_BOUND_IMPORT_POINTER_PROVENANCE.md): Microsoft PE/COFF primary documentation distinguishes prebound IAT contents from import lookup metadata; proposes a fail-closed Linux-hosted loader policy and Windows-reference/security gates. No experiment.
