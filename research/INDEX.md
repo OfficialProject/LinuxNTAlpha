@@ -180,3 +180,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R101 — Windows sparse-file controls versus Linux extent operations](R101_SPARSE_FILE_EXTENT_GATES.md): Microsoft sparse/zero/allocated-range controls compared with Linux fallocate hole punching and zero-range behavior; distinguishes guest sparse metadata from host extents and proposes differential tests. No experiment.
 
 - [R102 — SignalObjectAndWait handoff non-atomicity](R102_SIGNAL_OBJECT_AND_WAIT_HANDOFF.md): Microsoft explicitly disclaims atomic signal-then-wait behavior; distinguishes this API from R75 wait-all transactions and proposes Windows-reference gates. Documentation only; no experiment.
+
+- [R103 — Windows CPU Sets versus Linux thread affinity](R103_CPU_SETS_AFFINITY_GATES.md): Microsoft CPU Set precedence, process-default versus thread-selected policy and processor groups contrasted with Linux per-thread affinity and cpuset restrictions. Differential conformance proposed; no experiment.
