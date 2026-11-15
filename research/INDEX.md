@@ -170,3 +170,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R96 — fiber-local storage callbacks and module lifetime](R96_FLS_CALLBACK_LIFETIME_GATES.md): Microsoft FLS and POSIX pthread-key primary contracts; distinguishes process-wide FLS-index free callbacks from thread-only pthread destructors and documents unload-time callback hazards. Windows-reference gates proposed; no experiment.
 
 - [R97 — WaitOnAddress versus Linux futex conformance gates](R97_WAIT_ON_ADDRESS_FUTEX_GATES.md): Microsoft/Linux primary API contracts distinguish 1/2/4/8-byte guest address comparisons from Linux four-byte futex words, and isolate wake-registration, address lifetime, and cross-process-scope questions. Proposed differential tests only; no experiment.
+
+- [R98 — remote process memory access versus Linux process_vm_*](R98_REMOTE_PROCESS_MEMORY_GATES.md): Microsoft process-handle rights and full-range read/write contracts compared with Linux ptrace authorization and partial-copy returns; proposes target-lifetime, rights, and race conformance gates. No experiment.
