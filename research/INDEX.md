@@ -178,3 +178,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R100 — synchronous file pointer versus explicit-offset I/O](R100_FILE_POINTER_EXPLICIT_OFFSET_GATES.md): Microsoft ReadFile/WriteFile/SetFilePointerEx and Linux pread/pwrite primary contracts; distinguishes guest current-position state from per-request offsets and proposes Windows-reference aliasing/concurrency tests. No experiment.
 
 - [R101 — Windows sparse-file controls versus Linux extent operations](R101_SPARSE_FILE_EXTENT_GATES.md): Microsoft sparse/zero/allocated-range controls compared with Linux fallocate hole punching and zero-range behavior; distinguishes guest sparse metadata from host extents and proposes differential tests. No experiment.
+
+- [R102 — SignalObjectAndWait handoff non-atomicity](R102_SIGNAL_OBJECT_AND_WAIT_HANDOFF.md): Microsoft explicitly disclaims atomic signal-then-wait behavior; distinguishes this API from R75 wait-all transactions and proposes Windows-reference gates. Documentation only; no experiment.
