@@ -186,3 +186,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R104 — Windows timer-resolution policy versus Linux timer scheduling](R104_TIMER_RESOLUTION_WAITABLE_TIMER_GATES.md): Microsoft Windows 10/11 timeBeginPeriod policy, waitable timer signaling/APCs and Linux timer slack/timerfd contracts; proposes cross-version differential and wakeup/power gates. No experiment.
 
 - [R105 — pagefile-backed section commitment versus Linux overcommit](R105_SECTION_COMMIT_OVERCOMMIT_GATES.md): Microsoft SEC_COMMIT/SEC_RESERVE accounting and section lifetime contrasted with Linux mmap/MAP_NORESERVE and host overcommit policy; cross-process and failure-path conformance proposed, no experiment.
+
+- [R106 — SxS activation-context and manifest-directed binding](R106_SXS_ACTIVATION_CONTEXT_BINDING.md): Microsoft primary contracts distinguish per-thread activation stacks, manifest resolution and SxS redirects from ordinary DLL search; proposes Windows-reference, lifetime and security gates. No experiment.
