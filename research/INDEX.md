@@ -176,3 +176,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R99 — process command-line and environment fidelity](R99_PROCESS_COMMAND_LINE_ENVIRONMENT_GATES.md): Microsoft primary API contracts distinguish raw UTF-16 command lines and Windows environment blocks from Linux argv/envp; proposed Windows-reference differential gates, no experiment.
 
 - [R100 — synchronous file pointer versus explicit-offset I/O](R100_FILE_POINTER_EXPLICIT_OFFSET_GATES.md): Microsoft ReadFile/WriteFile/SetFilePointerEx and Linux pread/pwrite primary contracts; distinguishes guest current-position state from per-request offsets and proposes Windows-reference aliasing/concurrency tests. No experiment.
+
+- [R101 — Windows sparse-file controls versus Linux extent operations](R101_SPARSE_FILE_EXTENT_GATES.md): Microsoft sparse/zero/allocated-range controls compared with Linux fallocate hole punching and zero-range behavior; distinguishes guest sparse metadata from host extents and proposes differential tests. No experiment.
