@@ -164,3 +164,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R93 — debugger first-/second-chance exception dispatch](R93_DEBUGGER_EXCEPTION_DISPATCH_GATES.md): Microsoft debug-event contracts and Linux signal/ptrace boundaries; proposes Windows-reference dispatch ordering and debugger disposition gates. No experiment.
 
 - [R94 — NT section-view inheritance versus handle inheritance](R94_SECTION_VIEW_INHERITANCE_GATES.md): Microsoft primary contracts separate section object lifetime, process-relative handles and mapped-view inheritance; native/Win32 child-creation differences remain an explicit Windows-reference gate. No experiment.
+
+- [R95 — Windows critical-section recursion versus Linux futex](R95_CRITICAL_SECTION_FUTEX_RECURSION.md): Microsoft/Linux primary documentation; isolates process-local recursive ownership, spin policy, guest thread identity and futex wakeup correctness from SRW locks, WaitOnAddress and NT mutexes. Proposed differential tests only; no experiment.
