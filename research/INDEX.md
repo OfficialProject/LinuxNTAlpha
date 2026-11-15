@@ -154,3 +154,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R88 — regular and special user-mode APC delivery boundaries](R88_REGULAR_SPECIAL_USER_APC_DELIVERY.md): Microsoft primary Win32 contracts distinguish alertable FIFO delivery from special APC interruption, callback context and thread lifetime; proposes differential Windows/Linux gates. No experiment.
 
 - [R89 — DOS device namespace and NT path translation](R89_DOS_DEVICE_NT_PATH_TRANSLATION.md): Microsoft Win32/NT and Linux openat2 primary contracts; distinguishes DOS device aliases, drive-relative path parsing, NT RootDirectory resolution and host path confinement. Proposed reference and adversarial tests only; no experiment.
+
+- [R90 — guest/host syscall provenance and SUD security boundary](R90_GUEST_HOST_SYSCALL_PROVENANCE.md): Linux upstream SUD/seccomp documentation and R22/R26/R69 synthesis; distinguishes compatibility dispatch from containment, with nested-transition, concurrency and adversarial gates. No new experiment.
