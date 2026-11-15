@@ -182,3 +182,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R102 — SignalObjectAndWait handoff non-atomicity](R102_SIGNAL_OBJECT_AND_WAIT_HANDOFF.md): Microsoft explicitly disclaims atomic signal-then-wait behavior; distinguishes this API from R75 wait-all transactions and proposes Windows-reference gates. Documentation only; no experiment.
 
 - [R103 — Windows CPU Sets versus Linux thread affinity](R103_CPU_SETS_AFFINITY_GATES.md): Microsoft CPU Set precedence, process-default versus thread-selected policy and processor groups contrasted with Linux per-thread affinity and cpuset restrictions. Differential conformance proposed; no experiment.
+
+- [R104 — Windows timer-resolution policy versus Linux timer scheduling](R104_TIMER_RESOLUTION_WAITABLE_TIMER_GATES.md): Microsoft Windows 10/11 timeBeginPeriod policy, waitable timer signaling/APCs and Linux timer slack/timerfd contracts; proposes cross-version differential and wakeup/power gates. No experiment.
