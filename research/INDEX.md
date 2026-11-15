@@ -150,3 +150,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R86 — module-handle counted lookup, pinning and lifetime](R86_MODULE_HANDLE_PINNING_LIFETIME.md): Microsoft GetModuleHandleEx/FreeLibrary contracts; distinguishes borrowed handles, permanent pinning, address lookup and concurrent unload. Proposed Windows-reference tests only; no experiment.
 
 - [R87 — NT object name removal versus reference lifetime](R87_OBJECT_NAME_REFERENCE_LIFETIME.md): Microsoft Object Manager primary contracts distinguish temporary namespace-entry removal from object reference lifetime, handle closure on process exit, session naming and granted-rights checks. Proposed broker-state and Windows-reference gates; no experiment.
+
+- [R88 — regular and special user-mode APC delivery boundaries](R88_REGULAR_SPECIAL_USER_APC_DELIVERY.md): Microsoft primary Win32 contracts distinguish alertable FIFO delivery from special APC interruption, callback context and thread lifetime; proposes differential Windows/Linux gates. No experiment.
