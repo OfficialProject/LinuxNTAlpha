@@ -162,3 +162,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R92 — NT discretionary access checks and Linux credential boundary](R92_NT_DACL_ACCESS_CHECK_HOST_BOUNDARY.md): Microsoft MS-DTYP and Win32 primary contracts distinguish ordered ACE evaluation, NULL versus empty DACL, generic mapping, MAXIMUM_ALLOWED and host authorization. Proposed Windows differential/security gates; no experiment.
 
 - [R93 — debugger first-/second-chance exception dispatch](R93_DEBUGGER_EXCEPTION_DISPATCH_GATES.md): Microsoft debug-event contracts and Linux signal/ptrace boundaries; proposes Windows-reference dispatch ordering and debugger disposition gates. No experiment.
+
+- [R94 — NT section-view inheritance versus handle inheritance](R94_SECTION_VIEW_INHERITANCE_GATES.md): Microsoft primary contracts separate section object lifetime, process-relative handles and mapped-view inheritance; native/Win32 child-creation differences remain an explicit Windows-reference gate. No experiment.
