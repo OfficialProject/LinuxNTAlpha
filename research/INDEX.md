@@ -168,3 +168,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R95 — Windows critical-section recursion versus Linux futex](R95_CRITICAL_SECTION_FUTEX_RECURSION.md): Microsoft/Linux primary documentation; isolates process-local recursive ownership, spin policy, guest thread identity and futex wakeup correctness from SRW locks, WaitOnAddress and NT mutexes. Proposed differential tests only; no experiment.
 
 - [R96 — fiber-local storage callbacks and module lifetime](R96_FLS_CALLBACK_LIFETIME_GATES.md): Microsoft FLS and POSIX pthread-key primary contracts; distinguishes process-wide FLS-index free callbacks from thread-only pthread destructors and documents unload-time callback hazards. Windows-reference gates proposed; no experiment.
+
+- [R97 — WaitOnAddress versus Linux futex conformance gates](R97_WAIT_ON_ADDRESS_FUTEX_GATES.md): Microsoft/Linux primary API contracts distinguish 1/2/4/8-byte guest address comparisons from Linux four-byte futex words, and isolate wake-registration, address lifetime, and cross-process-scope questions. Proposed differential tests only; no experiment.
