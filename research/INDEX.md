@@ -172,3 +172,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R97 — WaitOnAddress versus Linux futex conformance gates](R97_WAIT_ON_ADDRESS_FUTEX_GATES.md): Microsoft/Linux primary API contracts distinguish 1/2/4/8-byte guest address comparisons from Linux four-byte futex words, and isolate wake-registration, address lifetime, and cross-process-scope questions. Proposed differential tests only; no experiment.
 
 - [R98 — remote process memory access versus Linux process_vm_*](R98_REMOTE_PROCESS_MEMORY_GATES.md): Microsoft process-handle rights and full-range read/write contracts compared with Linux ptrace authorization and partial-copy returns; proposes target-lifetime, rights, and race conformance gates. No experiment.
+
+- [R99 — process command-line and environment fidelity](R99_PROCESS_COMMAND_LINE_ENVIRONMENT_GATES.md): Microsoft primary API contracts distinguish raw UTF-16 command lines and Windows environment blocks from Linux argv/envp; proposed Windows-reference differential gates, no experiment.
