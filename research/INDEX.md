@@ -160,3 +160,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R91 — DLL loader-lock serialization and failure rollback](R91_DLL_LOADER_LOCK_NOTIFICATION_ROLLBACK.md): Microsoft primary loader entry-point contracts distinguish process/thread notification eligibility, serialized callbacks, FALSE versus exception failure paths, and dynamic versus static load. Proposed differential conformance only; no experiment.
 
 - [R92 — NT discretionary access checks and Linux credential boundary](R92_NT_DACL_ACCESS_CHECK_HOST_BOUNDARY.md): Microsoft MS-DTYP and Win32 primary contracts distinguish ordered ACE evaluation, NULL versus empty DACL, generic mapping, MAXIMUM_ALLOWED and host authorization. Proposed Windows differential/security gates; no experiment.
+
+- [R93 — debugger first-/second-chance exception dispatch](R93_DEBUGGER_EXCEPTION_DISPATCH_GATES.md): Microsoft debug-event contracts and Linux signal/ptrace boundaries; proposes Windows-reference dispatch ordering and debugger disposition gates. No experiment.
