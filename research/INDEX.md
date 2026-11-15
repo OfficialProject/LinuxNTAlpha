@@ -146,3 +146,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R84 — Win32 atom table namespace and lifetime](R84_WIN32_ATOM_TABLE_NAMESPACE_LIFETIME.md): Microsoft primary API contracts distinguish local and global atom identity, case-insensitive lookup, reference counting, process-exit persistence and integer atom boundaries. Proposed Windows-reference gates only; no experiment.
 
 - [R85 — InitOnce initialization retry and publication gates](R85_INIT_ONCE_INITIALIZATION_GATES.md): Microsoft primary API contracts distinguish retryable failure, synchronous/async completion, guest ABI layout and context publication; proposed Windows-reference tests only, no experiment.
+
+- [R86 — module-handle counted lookup, pinning and lifetime](R86_MODULE_HANDLE_PINNING_LIFETIME.md): Microsoft GetModuleHandleEx/FreeLibrary contracts; distinguishes borrowed handles, permanent pinning, address lookup and concurrent unload. Proposed Windows-reference tests only; no experiment.
