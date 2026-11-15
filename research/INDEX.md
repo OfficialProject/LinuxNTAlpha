@@ -158,3 +158,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R90 — guest/host syscall provenance and SUD security boundary](R90_GUEST_HOST_SYSCALL_PROVENANCE.md): Linux upstream SUD/seccomp documentation and R22/R26/R69 synthesis; distinguishes compatibility dispatch from containment, with nested-transition, concurrency and adversarial gates. No new experiment.
 
 - [R91 — DLL loader-lock serialization and failure rollback](R91_DLL_LOADER_LOCK_NOTIFICATION_ROLLBACK.md): Microsoft primary loader entry-point contracts distinguish process/thread notification eligibility, serialized callbacks, FALSE versus exception failure paths, and dynamic versus static load. Proposed differential conformance only; no experiment.
+
+- [R92 — NT discretionary access checks and Linux credential boundary](R92_NT_DACL_ACCESS_CHECK_HOST_BOUNDARY.md): Microsoft MS-DTYP and Win32 primary contracts distinguish ordered ACE evaluation, NULL versus empty DACL, generic mapping, MAXIMUM_ALLOWED and host authorization. Proposed Windows differential/security gates; no experiment.
