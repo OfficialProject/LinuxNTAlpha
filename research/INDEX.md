@@ -196,3 +196,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R109 — Windows CET shadow-stack policy versus Linux user shadow stack](R109_CET_SHADOW_STACK_POLICY_GATES.md): Microsoft and Linux primary contracts distinguish Windows process/image CET compatibility and strict-mode policy from Linux per-thread hardware enforcement and signal restoration. Proposes capability, Windows-reference and cross-ABI conformance gates; no experiment.
 
 - [R111 — per-handle IOCP completion suppression](R111_IOCP_COMPLETION_SUPPRESSION_GATES.md): Microsoft primary contracts distinguish immediate-success packet suppression, OVERLAPPED event low-bit suppression, and file-object event signaling from host async completion. Proposed differential/race gates; no experiment.
+
+- [R112 — Windows console objects versus Linux pseudoterminals](R112_WINDOWS_CONSOLE_PTY_BOUNDARIES.md): Microsoft console/ConPTY and Linux PTY primary documentation; distinguishes guest handle, input-record, Unicode and screen-buffer semantics from host terminal streams. Differential gates proposed; no experiment.
