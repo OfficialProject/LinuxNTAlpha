@@ -218,3 +218,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R121 — Windows heap identity and allocator semantic gates](R121_WINDOWS_HEAP_IDENTITY_ALLOCATOR_GATES.md): Microsoft heap API contracts distinguish process/private heap handles, allocation ownership, realloc failure and heap policy from host malloc. Windows-reference and backend differential gates proposed; no experiment.
 
 - [R122 — Windows child handle inheritance versus Linux fd inheritance](R122_CHILD_HANDLE_INHERITANCE_GATES.md): Microsoft child handle selection, stable numeric guest handles and access rights contrasted with Linux close-on-exec/clone descriptor semantics; proposes leak-resistant guest handle-table bootstrap and differential race tests. No experiment.
+
+- [R123 — general PAGE_GUARD one-shot fault gates](R123_GENERAL_GUARD_PAGE_ONESHOT_GATES.md): Microsoft and Linux primary contracts distinguish one-shot guard clearing, underlying protection and service-call failures from Linux mprotect/userfaultfd. Proposed Windows-reference and concurrency gates; no experiment.
