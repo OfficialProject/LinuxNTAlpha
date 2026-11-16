@@ -220,3 +220,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R122 — Windows child handle inheritance versus Linux fd inheritance](R122_CHILD_HANDLE_INHERITANCE_GATES.md): Microsoft child handle selection, stable numeric guest handles and access rights contrasted with Linux close-on-exec/clone descriptor semantics; proposes leak-resistant guest handle-table bootstrap and differential race tests. No experiment.
 
 - [R123 — general PAGE_GUARD one-shot fault gates](R123_GENERAL_GUARD_PAGE_ONESHOT_GATES.md): Microsoft and Linux primary contracts distinguish one-shot guard clearing, underlying protection and service-call failures from Linux mprotect/userfaultfd. Proposed Windows-reference and concurrency gates; no experiment.
+
+- [R124 — Windows interrupt-time domains versus Linux clocks](R124_WINDOWS_INTERRUPT_TIME_LINUX_CLOCK_DOMAINS.md): Microsoft/Linux primary contracts distinguish suspend-inclusive and suspend-exclusive elapsed clocks, precise versus coarse time readings, and time-namespace effects. Proposed differential gates only; no experiment.
