@@ -226,3 +226,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R125 — NT-compatible thread bootstrap publication and startup gates](R125_THREAD_BOOTSTRAP_PUBLICATION_GATES.md): Microsoft CreateThread/CRT and Linux clone/clear-child-TID primary contracts; proposes parked-host-thread publication barriers, rollback ownership and Windows differential tests. No experiment.
 
 - [R126 — x64 stack-probe helper and guest stack-growth gates](R126_X64_STACK_PROBE_HELPER_GATES.md): Microsoft compiler/ABI documentation distinguishes compiler-inserted `__chkstk` linkage and custom calling convention from R65 stack-growth handling. Proposes pinned-toolchain PE and Windows-reference gates; no experiment.
+
+- [R127 — PE resource tree and language-selection gates](R127_PE_RESOURCE_TREE_AND_LANGUAGE_GATES.md): Microsoft PE/Win32 primary contracts distinguish bounded resource-directory parsing from type/name/language lookup and MUI selection; proposes malformed-image and Windows-reference gates. No experiment.
