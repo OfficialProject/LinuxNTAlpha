@@ -224,3 +224,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R124 — Windows interrupt-time domains versus Linux clocks](R124_WINDOWS_INTERRUPT_TIME_LINUX_CLOCK_DOMAINS.md): Microsoft/Linux primary contracts distinguish suspend-inclusive and suspend-exclusive elapsed clocks, precise versus coarse time readings, and time-namespace effects. Proposed differential gates only; no experiment.
 
 - [R125 — NT-compatible thread bootstrap publication and startup gates](R125_THREAD_BOOTSTRAP_PUBLICATION_GATES.md): Microsoft CreateThread/CRT and Linux clone/clear-child-TID primary contracts; proposes parked-host-thread publication barriers, rollback ownership and Windows differential tests. No experiment.
+
+- [R126 — x64 stack-probe helper and guest stack-growth gates](R126_X64_STACK_PROBE_HELPER_GATES.md): Microsoft compiler/ABI documentation distinguishes compiler-inserted `__chkstk` linkage and custom calling convention from R65 stack-growth handling. Proposes pinned-toolchain PE and Windows-reference gates; no experiment.
