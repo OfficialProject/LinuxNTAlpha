@@ -198,3 +198,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R111 — per-handle IOCP completion suppression](R111_IOCP_COMPLETION_SUPPRESSION_GATES.md): Microsoft primary contracts distinguish immediate-success packet suppression, OVERLAPPED event low-bit suppression, and file-object event signaling from host async completion. Proposed differential/race gates; no experiment.
 
 - [R112 — Windows console objects versus Linux pseudoterminals](R112_WINDOWS_CONSOLE_PTY_BOUNDARIES.md): Microsoft console/ConPTY and Linux PTY primary documentation; distinguishes guest handle, input-record, Unicode and screen-buffer semantics from host terminal streams. Differential gates proposed; no experiment.
+
+- [R113 — fixed-address KUSER_SHARED_DATA versus Linux vDSO](R113_KUSER_SHARED_DATA_VDSO_GATES.md): Microsoft/Linux primary-source review distinguishes direct guest loads at 0x7FFE0000 from Linux clock APIs; proposes mapping, coherence, versioning and Windows-reference gates. No experiment.
