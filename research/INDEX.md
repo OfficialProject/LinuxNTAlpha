@@ -206,3 +206,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R115 — minimum NT runtime integration gates](R115_MINIMUM_NT_RUNTIME_INTEGRATION_GATES.md): evidence-based dependency order and falsifiable integrated PE/ABI/thread/dispatch lifecycle milestone. Architecture synthesis only; no new experiment.
 
 - [R116 — ALPC port semantics versus Linux Unix-domain IPC](R116_ALPC_UNIX_IPC_BOUNDARIES.md): Microsoft ALPC ETW, third-party native declarations and Linux unix(7) distinguish guest port identity, reply correlation, handle transfer and impersonation from AF_UNIX transport; proposed conformance/security gates only, no experiment.
+
+- [R117 — PE section alignment, host-page protection and discardable-section gates](R117_PE_SECTION_PAGE_PROTECTION_GATES.md): Microsoft PE and Linux mmap/mprotect primary contracts; distinguishes page-level permission conflicts and discard lifecycle from R19's narrow successful fixture. Parse-only and Windows-reference tests proposed; no experiment.
