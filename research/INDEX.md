@@ -204,3 +204,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R114 — NT delete disposition versus Linux unlink](R114_DELETE_DISPOSITION_UNLINK_GATES.md): Microsoft file-disposition/Win32 sharing contracts compared with Linux unlink lifetime; distinguishes legacy delete-pending from POSIX namespace removal, with proposed Windows-reference and race gates. No experiment.
 
 - [R115 — minimum NT runtime integration gates](R115_MINIMUM_NT_RUNTIME_INTEGRATION_GATES.md): evidence-based dependency order and falsifiable integrated PE/ABI/thread/dispatch lifecycle milestone. Architecture synthesis only; no new experiment.
+
+- [R116 — ALPC port semantics versus Linux Unix-domain IPC](R116_ALPC_UNIX_IPC_BOUNDARIES.md): Microsoft ALPC ETW, third-party native declarations and Linux unix(7) distinguish guest port identity, reply correlation, handle transfer and impersonation from AF_UNIX transport; proposed conformance/security gates only, no experiment.
