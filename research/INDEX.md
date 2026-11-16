@@ -192,3 +192,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R107 — bound-import pointer provenance and loader trust boundary](R107_BOUND_IMPORT_POINTER_PROVENANCE.md): Microsoft PE/COFF primary documentation distinguishes prebound IAT contents from import lookup metadata; proposes a fail-closed Linux-hosted loader policy and Windows-reference/security gates. No experiment.
 
 - [R108 — Linux signal ownership and NT exception ingress](R108_SIGNAL_OWNERSHIP_NT_EXCEPTION_INGRESS.md): Linux process-wide signal dispositions versus thread masks, host/guest fault provenance, nested-fault and Windows SEH ordering gates. Primary-source review only; no experiment.
+
+- [R109 — Windows CET shadow-stack policy versus Linux user shadow stack](R109_CET_SHADOW_STACK_POLICY_GATES.md): Microsoft and Linux primary contracts distinguish Windows process/image CET compatibility and strict-mode policy from Linux per-thread hardware enforcement and signal restoration. Proposes capability, Windows-reference and cross-ABI conformance gates; no experiment.
