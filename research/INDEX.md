@@ -194,3 +194,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R108 — Linux signal ownership and NT exception ingress](R108_SIGNAL_OWNERSHIP_NT_EXCEPTION_INGRESS.md): Linux process-wide signal dispositions versus thread masks, host/guest fault provenance, nested-fault and Windows SEH ordering gates. Primary-source review only; no experiment.
 
 - [R109 — Windows CET shadow-stack policy versus Linux user shadow stack](R109_CET_SHADOW_STACK_POLICY_GATES.md): Microsoft and Linux primary contracts distinguish Windows process/image CET compatibility and strict-mode policy from Linux per-thread hardware enforcement and signal restoration. Proposes capability, Windows-reference and cross-ABI conformance gates; no experiment.
+
+- [R111 — per-handle IOCP completion suppression](R111_IOCP_COMPLETION_SUPPRESSION_GATES.md): Microsoft primary contracts distinguish immediate-success packet suppression, OVERLAPPED event low-bit suppression, and file-object event signaling from host async completion. Proposed differential/race gates; no experiment.
