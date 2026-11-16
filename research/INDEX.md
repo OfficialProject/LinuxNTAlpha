@@ -212,3 +212,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R118 — Windows large-page section versus Linux HugeTLB](R118_LARGE_PAGE_SECTION_HUGETLB_GATES.md): Microsoft and Linux primary contracts distinguish section-level large-page eligibility, Windows 10 1703+ view opt-in, guest privilege checks and Linux unswappable HugeTLB pool constraints. Versioned differential and capability gates proposed; no experiment.
 
 - [R119 — Linux memfd sealing versus mutable NT section views](R119_MEMFD_SEALS_SECTION_VIEW_GATES.md): Linux memfd/seal and Microsoft mapping contracts distinguish irreversible inode seals from per-view NT access, COW and protection transitions. Proposed Windows/Linux differential and security gates; no experiment.
+
+- [R120 — NT context continuation versus Linux signal-frame restoration](R120_NT_CONTEXT_CONTINUATION_SIGNAL_RETURN.md): Microsoft RtlRestoreContext/RtlUnwindEx and Linux signal-frame primary contracts; separates guest CONTEXT, host ucontext and unwind semantics. Isolated Linux and Windows-reference gates proposed; no experiment.
