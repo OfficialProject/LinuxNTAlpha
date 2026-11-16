@@ -208,3 +208,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R116 — ALPC port semantics versus Linux Unix-domain IPC](R116_ALPC_UNIX_IPC_BOUNDARIES.md): Microsoft ALPC ETW, third-party native declarations and Linux unix(7) distinguish guest port identity, reply correlation, handle transfer and impersonation from AF_UNIX transport; proposed conformance/security gates only, no experiment.
 
 - [R117 — PE section alignment, host-page protection and discardable-section gates](R117_PE_SECTION_PAGE_PROTECTION_GATES.md): Microsoft PE and Linux mmap/mprotect primary contracts; distinguishes page-level permission conflicts and discard lifecycle from R19's narrow successful fixture. Parse-only and Windows-reference tests proposed; no experiment.
+
+- [R118 — Windows large-page section versus Linux HugeTLB](R118_LARGE_PAGE_SECTION_HUGETLB_GATES.md): Microsoft and Linux primary contracts distinguish section-level large-page eligibility, Windows 10 1703+ view opt-in, guest privilege checks and Linux unswappable HugeTLB pool constraints. Versioned differential and capability gates proposed; no experiment.
