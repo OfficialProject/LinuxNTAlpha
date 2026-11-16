@@ -216,3 +216,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R120 — NT context continuation versus Linux signal-frame restoration](R120_NT_CONTEXT_CONTINUATION_SIGNAL_RETURN.md): Microsoft RtlRestoreContext/RtlUnwindEx and Linux signal-frame primary contracts; separates guest CONTEXT, host ucontext and unwind semantics. Isolated Linux and Windows-reference gates proposed; no experiment.
 
 - [R121 — Windows heap identity and allocator semantic gates](R121_WINDOWS_HEAP_IDENTITY_ALLOCATOR_GATES.md): Microsoft heap API contracts distinguish process/private heap handles, allocation ownership, realloc failure and heap policy from host malloc. Windows-reference and backend differential gates proposed; no experiment.
+
+- [R122 — Windows child handle inheritance versus Linux fd inheritance](R122_CHILD_HANDLE_INHERITANCE_GATES.md): Microsoft child handle selection, stable numeric guest handles and access rights contrasted with Linux close-on-exec/clone descriptor semantics; proposes leak-resistant guest handle-table bootstrap and differential race tests. No experiment.
