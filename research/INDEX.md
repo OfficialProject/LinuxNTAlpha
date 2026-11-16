@@ -202,3 +202,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R113 — fixed-address KUSER_SHARED_DATA versus Linux vDSO](R113_KUSER_SHARED_DATA_VDSO_GATES.md): Microsoft/Linux primary-source review distinguishes direct guest loads at 0x7FFE0000 from Linux clock APIs; proposes mapping, coherence, versioning and Windows-reference gates. No experiment.
 
 - [R114 — NT delete disposition versus Linux unlink](R114_DELETE_DISPOSITION_UNLINK_GATES.md): Microsoft file-disposition/Win32 sharing contracts compared with Linux unlink lifetime; distinguishes legacy delete-pending from POSIX namespace removal, with proposed Windows-reference and race gates. No experiment.
+
+- [R115 — minimum NT runtime integration gates](R115_MINIMUM_NT_RUNTIME_INTEGRATION_GATES.md): evidence-based dependency order and falsifiable integrated PE/ABI/thread/dispatch lifecycle milestone. Architecture synthesis only; no new experiment.
