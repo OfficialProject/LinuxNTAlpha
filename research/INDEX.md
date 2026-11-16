@@ -222,3 +222,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R123 — general PAGE_GUARD one-shot fault gates](R123_GENERAL_GUARD_PAGE_ONESHOT_GATES.md): Microsoft and Linux primary contracts distinguish one-shot guard clearing, underlying protection and service-call failures from Linux mprotect/userfaultfd. Proposed Windows-reference and concurrency gates; no experiment.
 
 - [R124 — Windows interrupt-time domains versus Linux clocks](R124_WINDOWS_INTERRUPT_TIME_LINUX_CLOCK_DOMAINS.md): Microsoft/Linux primary contracts distinguish suspend-inclusive and suspend-exclusive elapsed clocks, precise versus coarse time readings, and time-namespace effects. Proposed differential gates only; no experiment.
+
+- [R125 — NT-compatible thread bootstrap publication and startup gates](R125_THREAD_BOOTSTRAP_PUBLICATION_GATES.md): Microsoft CreateThread/CRT and Linux clone/clear-child-TID primary contracts; proposes parked-host-thread publication barriers, rollback ownership and Windows differential tests. No experiment.
