@@ -1,0 +1,28 @@
+# R149 — NT extended attributes versus Linux xattrs: encoding, atomicity and filesystem gates
+
+Date: 2026-11-17. Status: **VERIFIED FROM SOURCE (documentation only)**; no Windows or Linux experiment executed. Complements R61 (file identity), R79 (alternate data streams), R110 (registry notifications), R114 (delete disposition) and R136 (USN); EAs are not alternate data streams or Linux xattrs by definition.
+
+## Verified contracts
+
+1. [MS-FSCC 2.4.16](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fscc/0eb94f48-6aac-41df-a878-79f4dcfd8989) specifies FILE_FULL_EA_INFORMATION records: 4-byte NextEntryOffset, 1-byte Flags, 1-byte EaNameLength, 2-byte EaValueLength, NUL-terminated ASCII name and binary value. Entries in a chain are 4-byte aligned; the final NextEntryOffset is zero. Only zero or FILE_NEED_EA (0x80) is valid for Flags. A zero-length value in a set request deletes the named EA. Names have character restrictions, including backslash, slash, colon, wildcard characters and several punctuation marks. The protocol specifies distinct invalid-name, too-small-buffer and partial-result statuses.
+2. [MS-FSCC 2.4.16.1](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fscc/79dc1ea1-158c-4b24-b0e1-8c16c7e2af6b) defines a separate FILE_GET_EA_INFORMATION name filter, also a 4-byte-aligned offset-linked chain. The query input is not the same as a returned EA record.
+3. [MS-FSA set-EA algorithm](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fsa/be0bb27a-4954-4786-80a6-947df0e82a11) explicitly makes EA support optional (unsupported object stores fail with STATUS_INVALID_DEVICE_REQUEST), validates the list, updates existing entries, rejects total EA storage exceeding 64 KiB minus five bytes with rollback, and ties successful mutation to change time, archive attribute, USN and change notifications. These are **protocol object-store rules**, not proof that every local Windows filesystem/build behaves identically.
+4. [MS-FSA query-EA algorithm](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fsa/36660930-adcc-4145-a206-f38502e9eb79) requires FILE_READ_EA, maintains a per-open NextEaEntry cursor, returns only complete entries, and distinguishes STATUS_NO_EAS_ON_FILE, STATUS_BUFFER_TOO_SMALL, STATUS_BUFFER_OVERFLOW and STATUS_SUCCESS. A stateless Linux listxattr translation does not directly preserve that cursor.
+5. The Windows [ZwSetEaFile WDK documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-zwseteafile) describes a validated FILE_FULL_EA_INFORMATION input buffer and notes STATUS_EA_LIST_INCONSISTENT. This is a kernel DDI reference, not evidence of userspace NTDLL implementation completeness.
+6. Linux [xattr(7)](https://man7.org/linux/man-pages/man7/xattr.7.html) documents namespaced attributes (not NT EA names), VFS limits of 255 bytes per name and 64 KiB per value, a 64 KiB returned name-list limit, and filesystem-dependent aggregate storage constraints. [listxattr(2)](https://man7.org/linux/man-pages/man2/listxattr.2.html) warns that the list may change between size and retrieval and may become unlistable when the names exceed the VFS cap. Linux host support is not equivalent to the NT EA wire format, status rules, or atomic multi-EA transaction.
+
+## Architecture hypotheses — not implemented
+
+A guest EA service should parse the complete untrusted offset chain with checked arithmetic, bounded lengths, termination, alignment, duplicate-name policy and flags **before** mutating any host state. Model per-open enumeration state and explicit NTSTATUS translation. A dedicated serialized EA blob keyed by stable guest file identity could preserve guest naming, NEED_EA flags, ordering and transaction rollback, but needs durable storage, hard-link identity, concurrent writer arbitration, crash recovery, rename/delete integration and quotas. Storing each EA as a separate `user.*` xattr is simpler but cannot guarantee atomic multi-EA replacement, per-open enumeration semantics or identical filesystem capacity. Neither design is selected.
+
+## Falsification gates (NOT RUN)
+
+- Windows-reference fixture: query empty EAs, set two records, query filtered and unfiltered with small/exact/partial buffers; capture returned byte counts, NTSTATUS and per-open cursor behavior.
+- Mutate offsets, alignment, terminator, flags, forbidden characters, duplicate names, zero-length values and total payload near 64 KiB; verify validation-before-mutation and rollback.
+- Test access masks FILE_READ_EA / FILE_WRITE_EA, hard-linked names, concurrent handles, reopen persistence, rename and delete, notification and change-time effects.
+- Linux filesystem matrix (ext4, XFS, Btrfs, tmpfs, overlayfs and network mounts where available): test xattr namespace permissions, per-value and aggregate capacity, atomicity under competing writers, crash recovery and unsupported-feature handling. Record kernel, mount options and errno; do not infer Windows behavior from Linux results.
+- Security: ensure guest EA names never become privileged `trusted.*` or `security.*` host xattr operations; forbid guest-controlled host path traversal and enforce broker file identity/access checks.
+
+## OPEN
+
+Exact local NTFS/ReFS behavior across Windows builds, EA case matching and enumeration ordering, duplicate-name resolution, transactional semantics of ZwSetEaFile versus protocol MS-FSA, and the lowest-overhead durable storage strategy remain unverified. Before implementation, pin upstream Linux source revisions and obtain Windows reference traces. No benchmark, conformance test or filesystem probe is claimed here.
