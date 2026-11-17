@@ -248,3 +248,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R136 — NTFS USN change journal versus Linux event watches](R136_USN_CHANGE_JOURNAL_LINUX_EVENT_GATES.md): Microsoft/Linux primary contracts distinguish persistent volume replay, journal generation and file-reference enumeration from inotify/fanotify queues; proposes Windows-reference and Linux gap tests. Documentation only; no experiment.
 
 - [R137 — io_uring cancellation CQE versus target completion lifetime](R137_IO_URING_CANCEL_TARGET_CQE_LIFETIME.md): Microsoft and liburing primary documentation distinguish cancellation requests from terminal I/O completion; proposes generation-tagged request identity, buffer-lifetime and dual-CQE race gates. No experiment.
+
+- [R98 — NT service identity and Nt/Zw caller-mode gates](R98_NT_SERVICE_IDENTITY_CALLER_MODE.md): Microsoft primary contracts distinguish named ntdll exports, user-mode Nt/Zw equivalence, build-sensitive native interfaces, and raw syscall dispatch. Proposes Windows-reference and Linux fixture gates; no experiment.
