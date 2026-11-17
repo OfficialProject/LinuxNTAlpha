@@ -250,3 +250,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R137 — io_uring cancellation CQE versus target completion lifetime](R137_IO_URING_CANCEL_TARGET_CQE_LIFETIME.md): Microsoft and liburing primary documentation distinguish cancellation requests from terminal I/O completion; proposes generation-tagged request identity, buffer-lifetime and dual-CQE race gates. No experiment.
 
 - [R98 — NT service identity and Nt/Zw caller-mode gates](R98_NT_SERVICE_IDENTITY_CALLER_MODE.md): Microsoft primary contracts distinguish named ntdll exports, user-mode Nt/Zw equivalence, build-sensitive native interfaces, and raw syscall dispatch. Proposes Windows-reference and Linux fixture gates; no experiment.
+
+- [R138 — upstream SUD inclusive/exclusive mode drift and capability gates](R138_SUD_INCLUSIVE_EXCLUSIVE_VERSION_GATES.md): pinned upstream-master documentation contrasts with versioned v6.12; no runtime test, release availability or speedup asserted.
