@@ -228,3 +228,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R126 — x64 stack-probe helper and guest stack-growth gates](R126_X64_STACK_PROBE_HELPER_GATES.md): Microsoft compiler/ABI documentation distinguishes compiler-inserted `__chkstk` linkage and custom calling convention from R65 stack-growth handling. Proposes pinned-toolchain PE and Windows-reference gates; no experiment.
 
 - [R127 — PE resource tree and language-selection gates](R127_PE_RESOURCE_TREE_AND_LANGUAGE_GATES.md): Microsoft PE/Win32 primary contracts distinguish bounded resource-directory parsing from type/name/language lookup and MUI selection; proposes malformed-image and Windows-reference gates. No experiment.
+
+- [R128 — NT service identity and versioned dispatch gates](R128_NT_SERVICE_DISPATCH_VERSIONING_GATES.md): Microsoft primary API contracts and R26/R90 synthesis distinguish named NTDLL services from build-specific raw syscall identifiers; proposes synthetic profile, negative dispatch and Windows-reference gates. No experiment.
