@@ -230,3 +230,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R127 — PE resource tree and language-selection gates](R127_PE_RESOURCE_TREE_AND_LANGUAGE_GATES.md): Microsoft PE/Win32 primary contracts distinguish bounded resource-directory parsing from type/name/language lookup and MUI selection; proposes malformed-image and Windows-reference gates. No experiment.
 
 - [R128 — NT service identity and versioned dispatch gates](R128_NT_SERVICE_DISPATCH_VERSIONING_GATES.md): Microsoft primary API contracts and R26/R90 synthesis distinguish named NTDLL services from build-specific raw syscall identifiers; proposes synthetic profile, negative dispatch and Windows-reference gates. No experiment.
+
+- [R129 — seccomp user-notification broker limits](R129_SECCOMP_USER_NOTIFICATION_BROKER_GATES.md): Linux seccomp primary contracts distinguish listener-mediated Linux syscall emulation from authenticated NT syscall provenance; identifies continuation races, listener liveness, collision and performance gates. Documentation only; no experiment.
