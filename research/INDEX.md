@@ -254,3 +254,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R138 — upstream SUD inclusive/exclusive mode drift and capability gates](R138_SUD_INCLUSIVE_EXCLUSIVE_VERSION_GATES.md): pinned upstream-master documentation contrasts with versioned v6.12; no runtime test, release availability or speedup asserted.
 
 - [R139 — Windows write-watch versus Linux soft-dirty reset scope](R139_WRITE_WATCH_SOFT_DIRTY_RESET_GATES.md): Microsoft region-scoped dirty-page query/reset contracts contrasted with Linux process-wide soft-dirty clear_refs; identifies independent-allocation and concurrent-writer conformance gates. Documentation only; no experiment.
+
+- [R140 — Windows per-file-handle I/O priority hints versus Linux task I/O priority](R140_FILE_IO_PRIORITY_HINT_SCOPE_GATES.md): Microsoft and Linux primary contracts distinguish guest file-handle-scoped hints from host task-scoped ioprio; proposes isolated submission and Windows/Linux differential gates. Documentation only; no experiment.
