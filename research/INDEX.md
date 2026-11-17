@@ -246,3 +246,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R135 — Windows opportunistic locks versus Linux file leases](R135_OPLOCK_LINUX_LEASE_GATES.md): primary Microsoft/Linux contracts distinguish oplock grants, asynchronous break completion, acknowledgments and directory oplocks from Linux signal-driven file leases. Differential/security gates proposed; no experiment.
 
 - [R136 — NTFS USN change journal versus Linux event watches](R136_USN_CHANGE_JOURNAL_LINUX_EVENT_GATES.md): Microsoft/Linux primary contracts distinguish persistent volume replay, journal generation and file-reference enumeration from inotify/fanotify queues; proposes Windows-reference and Linux gap tests. Documentation only; no experiment.
+
+- [R137 — io_uring cancellation CQE versus target completion lifetime](R137_IO_URING_CANCEL_TARGET_CQE_LIFETIME.md): Microsoft and liburing primary documentation distinguish cancellation requests from terminal I/O completion; proposes generation-tagged request identity, buffer-lifetime and dual-CQE race gates. No experiment.
