@@ -260,3 +260,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R141 — x64 extended-state context and feature negotiation](R141_XSTATE_CONTEXT_FEATURE_NEGOTIATION_GATES.md): Microsoft context/XSTATE, Intel CPUID/XSAVE and Linux signal-state primary contracts; separates ordinary ABI preservation from full guest context capture and feature policy. Proposed reference and Linux gates only; no experiment.
 
 - [R142 — Windows NUMA topology and Linux placement scope](R142_NUMA_TOPOLOGY_PLACEMENT_GATES.md): Microsoft NUMA topology/allocation and Linux memory-policy primary contracts distinguish guest node identity, preferred placement, per-thread policy, VMA and shared-mapping scope, and cpuset restrictions. Proposed Windows/Linux differential and isolation gates; no experiment.
+
+- [R143 — orderly versus forced process termination transaction](R143_PROCESS_TERMINATION_TRANSACTION_GATES.md): Microsoft ExitProcess/TerminateProcess and Linux exit_group primary contracts distinguish DLL detach, asynchronous remote termination, I/O draining and durable guest process identity. Differential/security gates proposed; no experiment.
