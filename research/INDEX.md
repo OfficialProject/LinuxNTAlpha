@@ -256,3 +256,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R139 — Windows write-watch versus Linux soft-dirty reset scope](R139_WRITE_WATCH_SOFT_DIRTY_RESET_GATES.md): Microsoft region-scoped dirty-page query/reset contracts contrasted with Linux process-wide soft-dirty clear_refs; identifies independent-allocation and concurrent-writer conformance gates. Documentation only; no experiment.
 
 - [R140 — Windows per-file-handle I/O priority hints versus Linux task I/O priority](R140_FILE_IO_PRIORITY_HINT_SCOPE_GATES.md): Microsoft and Linux primary contracts distinguish guest file-handle-scoped hints from host task-scoped ioprio; proposes isolated submission and Windows/Linux differential gates. Documentation only; no experiment.
+
+- [R141 — x64 extended-state context and feature negotiation](R141_XSTATE_CONTEXT_FEATURE_NEGOTIATION_GATES.md): Microsoft context/XSTATE, Intel CPUID/XSAVE and Linux signal-state primary contracts; separates ordinary ABI preservation from full guest context capture and feature policy. Proposed reference and Linux gates only; no experiment.
