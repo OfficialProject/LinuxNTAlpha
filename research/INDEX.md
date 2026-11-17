@@ -252,3 +252,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R98 — NT service identity and Nt/Zw caller-mode gates](R98_NT_SERVICE_IDENTITY_CALLER_MODE.md): Microsoft primary contracts distinguish named ntdll exports, user-mode Nt/Zw equivalence, build-sensitive native interfaces, and raw syscall dispatch. Proposes Windows-reference and Linux fixture gates; no experiment.
 
 - [R138 — upstream SUD inclusive/exclusive mode drift and capability gates](R138_SUD_INCLUSIVE_EXCLUSIVE_VERSION_GATES.md): pinned upstream-master documentation contrasts with versioned v6.12; no runtime test, release availability or speedup asserted.
+
+- [R139 — Windows write-watch versus Linux soft-dirty reset scope](R139_WRITE_WATCH_SOFT_DIRTY_RESET_GATES.md): Microsoft region-scoped dirty-page query/reset contracts contrasted with Linux process-wide soft-dirty clear_refs; identifies independent-allocation and concurrent-writer conformance gates. Documentation only; no experiment.
