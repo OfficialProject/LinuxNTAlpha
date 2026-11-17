@@ -232,3 +232,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R128 — NT service identity and versioned dispatch gates](R128_NT_SERVICE_DISPATCH_VERSIONING_GATES.md): Microsoft primary API contracts and R26/R90 synthesis distinguish named NTDLL services from build-specific raw syscall identifiers; proposes synthetic profile, negative dispatch and Windows-reference gates. No experiment.
 
 - [R129 — seccomp user-notification broker limits](R129_SECCOMP_USER_NOTIFICATION_BROKER_GATES.md): Linux seccomp primary contracts distinguish listener-mediated Linux syscall emulation from authenticated NT syscall provenance; identifies continuation races, listener liveness, collision and performance gates. Documentation only; no experiment.
+
+- [R130 — Windows child-process creation transaction versus Linux exec](R130_CHILD_PROCESS_CREATION_TRANSACTION_GATES.md): directly inspected Microsoft CreateProcessW/creation-flags and Linux execve documentation; distinguishes guest child/primary-thread publication, suspended startup, token and inherited-handle boundaries from Linux image replacement. Proposed differential/rollback gates only; no experiment.
