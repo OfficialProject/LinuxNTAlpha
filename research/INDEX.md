@@ -242,3 +242,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R133 — Windows job CPU rate versus Linux cgroup scheduling](R133_JOB_CPU_RATE_CONTROL_CGROUP_GATES.md): Microsoft and Linux primary contracts distinguish cycle-based job hard caps, 1–9 weights and min/max reservations from cgroup time quotas, 1–10000 weights and utilization clamps; identifies hierarchy, scheduler-class bypass and differential enforcement gates. Documentation only; no experiment.
 
 - [R134 — job UI restrictions versus Linux desktop authority](R134_JOB_UI_RESTRICTIONS_DESKTOP_AUTHORITY_GATES.md): Microsoft job UI restriction flags and Linux cgroup documentation isolate USER-handle, clipboard, global-atom, desktop and display policy from resource enforcement; proposes reference/security gates. Documentation only; no experiment.
+
+- [R135 — Windows opportunistic locks versus Linux file leases](R135_OPLOCK_LINUX_LEASE_GATES.md): primary Microsoft/Linux contracts distinguish oplock grants, asynchronous break completion, acknowledgments and directory oplocks from Linux signal-driven file leases. Differential/security gates proposed; no experiment.
