@@ -244,3 +244,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R134 — job UI restrictions versus Linux desktop authority](R134_JOB_UI_RESTRICTIONS_DESKTOP_AUTHORITY_GATES.md): Microsoft job UI restriction flags and Linux cgroup documentation isolate USER-handle, clipboard, global-atom, desktop and display policy from resource enforcement; proposes reference/security gates. Documentation only; no experiment.
 
 - [R135 — Windows opportunistic locks versus Linux file leases](R135_OPLOCK_LINUX_LEASE_GATES.md): primary Microsoft/Linux contracts distinguish oplock grants, asynchronous break completion, acknowledgments and directory oplocks from Linux signal-driven file leases. Differential/security gates proposed; no experiment.
+
+- [R136 — NTFS USN change journal versus Linux event watches](R136_USN_CHANGE_JOURNAL_LINUX_EVENT_GATES.md): Microsoft/Linux primary contracts distinguish persistent volume replay, journal generation and file-reference enumeration from inotify/fanotify queues; proposes Windows-reference and Linux gap tests. Documentation only; no experiment.
