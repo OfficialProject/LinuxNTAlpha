@@ -292,3 +292,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R159 — activation-context stack, callback propagation and SxS binding gates](R159_ACTIVATION_CONTEXT_STACK_CALLBACK_BINDING_GATES.md): Microsoft primary contracts distinguish thread-local activation stacks, cookie validation, reference ownership and context-dependent binding from host loader state; proposes Windows-reference and security gates only, no experiment.
 
 - [R160 — threadpool I/O notification accounting and overlapped-request lifetime](R160_THREADPOOL_IO_NOTIFICATION_LIFETIME_GATES.md): Microsoft primary API contracts distinguish Start/Cancel notification credits, underlying I/O completion and queued/running callback lifetimes; proposed differential gates only, no experiment.
+
+- [R161 — critical-section recursion, ownership, spin and lifetime gates](R161_CRITICAL_SECTION_RECURSION_LIFETIME_GATES.md): Microsoft primary API contracts distinguish recursive process-local critical sections from SRW locks, document invalid teardown and owner-death boundaries, and propose Windows-reference and Linux safety gates. Documentation only; no experiment.
