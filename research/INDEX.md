@@ -282,3 +282,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R153 — threadpool cleanup-group membership and teardown gates](R153_THREADPOOL_CLEANUP_GROUP_TEARDOWN_GATES.md): Microsoft primary contracts establish aggregate member release, pending callback cancellation, running callback drain, group reuse and documented concurrent creation races; proposes lifetime and Windows differential gates. No experiment.
 
 - [R154 — threadpool capacity, callback priority and asynchronous pool close](R154_THREADPOOL_POOL_CAPACITY_PRIORITY_GATES.md): Microsoft primary contracts distinguish per-pool thread limits, callback-environment routing, priority of pending callbacks and asynchronous pool closure. Proposed Windows-reference, race and lifetime gates only; no experiment.
+
+- [R155 — threadpool callback disassociation versus execution and cleanup-group lifetime](R155_THREADPOOL_CALLBACK_DISASSOCIATION_GATES.md): Microsoft primary contracts distinguish object-specific callback wait release from actual callback return and group/module ownership; proposes Windows-reference and mock-scheduler tests. Documentation only; no experiment.
