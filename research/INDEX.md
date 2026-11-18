@@ -294,3 +294,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R160 — threadpool I/O notification accounting and overlapped-request lifetime](R160_THREADPOOL_IO_NOTIFICATION_LIFETIME_GATES.md): Microsoft primary API contracts distinguish Start/Cancel notification credits, underlying I/O completion and queued/running callback lifetimes; proposed differential gates only, no experiment.
 
 - [R161 — critical-section recursion, ownership, spin and lifetime gates](R161_CRITICAL_SECTION_RECURSION_LIFETIME_GATES.md): Microsoft primary API contracts distinguish recursive process-local critical sections from SRW locks, document invalid teardown and owner-death boundaries, and propose Windows-reference and Linux safety gates. Documentation only; no experiment.
+
+- [R162 — bound-import metadata and rebinding gates](R162_BOUND_IMPORT_REBINDING_GATES.md): Microsoft PE-format and data-directory primary contracts distinguish ordinary prebound IAT state from original lookup and delay-bound metadata. Proposes conservative rebinding, parser-security and Windows-reference gates. Documentation review only; no experiment.
