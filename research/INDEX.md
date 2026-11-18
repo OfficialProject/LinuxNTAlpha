@@ -304,3 +304,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R165 — Windows fiber switching, FLS and thread identity](R165_FIBER_SWITCH_FLS_THREAD_IDENTITY_GATES.md): Microsoft primary contracts distinguish cooperative fiber stacks and per-fiber FLS from executing-thread TLS and identity; proposes Windows-reference migration, lifetime and Linux ABI/CET/XSTATE gates. No experiment.
 
 - [R166 — keyed-event rendezvous versus Linux futex wake](R166_KEYED_EVENT_RENDEZVOUS_FUTEX_GATES.md): Wine source and Linux futex contracts distinguish paired keyed wait/release from address-based wake; Windows-reference, security and concurrency gates proposed. No experiment.
+
+- [R167 — Windows delayed clipboard rendering versus Wayland selection ownership](R167_CLIPBOARD_DELAYED_RENDER_WAYLAND_SELECTION_GATES.md): Microsoft clipboard ownership, render messages and window-station sequence contracts contrasted with Wayland focus-scoped offers; proposed lifecycle, access-control and differential gates. Documentation only; no experiment.
