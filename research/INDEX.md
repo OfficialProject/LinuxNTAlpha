@@ -302,3 +302,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R164 — SUD SIGSYS alternate-stack and continuation lifetime gates](R164_SUD_SIGSYS_ALTSTACK_CONTINUATION_GATES.md): Linux sigaltstack/SS_AUTODISARM, sigreturn and signal-safety contracts expose suspended-handler-frame ownership and blocking NT service continuation hazards; proposes kernel capability, repeated-trap, per-thread and cancellation tests. Documentation only; no experiment.
 
 - [R165 — Windows fiber switching, FLS and thread identity](R165_FIBER_SWITCH_FLS_THREAD_IDENTITY_GATES.md): Microsoft primary contracts distinguish cooperative fiber stacks and per-fiber FLS from executing-thread TLS and identity; proposes Windows-reference migration, lifetime and Linux ABI/CET/XSTATE gates. No experiment.
+
+- [R166 — keyed-event rendezvous versus Linux futex wake](R166_KEYED_EVENT_RENDEZVOUS_FUTEX_GATES.md): Wine source and Linux futex contracts distinguish paired keyed wait/release from address-based wake; Windows-reference, security and concurrency gates proposed. No experiment.
