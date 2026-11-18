@@ -280,3 +280,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R152 — threadpool timer period, coalescing window and teardown](R152_THREADPOOL_TIMER_PERIOD_SLACK_LIFETIME_GATES.md): Microsoft primary API contracts distinguish one-shot/periodic scheduling, UTC versus awake-time deadlines, SetThreadpoolTimerEx race return, and queued versus executing callback lifetime. Proposed differential gates only; no experiment.
 
 - [R153 — threadpool cleanup-group membership and teardown gates](R153_THREADPOOL_CLEANUP_GROUP_TEARDOWN_GATES.md): Microsoft primary contracts establish aggregate member release, pending callback cancellation, running callback drain, group reuse and documented concurrent creation races; proposes lifetime and Windows differential gates. No experiment.
+
+- [R154 — threadpool capacity, callback priority and asynchronous pool close](R154_THREADPOOL_POOL_CAPACITY_PRIORITY_GATES.md): Microsoft primary contracts distinguish per-pool thread limits, callback-environment routing, priority of pending callbacks and asynchronous pool closure. Proposed Windows-reference, race and lifetime gates only; no experiment.
