@@ -306,3 +306,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R166 — keyed-event rendezvous versus Linux futex wake](R166_KEYED_EVENT_RENDEZVOUS_FUTEX_GATES.md): Wine source and Linux futex contracts distinguish paired keyed wait/release from address-based wake; Windows-reference, security and concurrency gates proposed. No experiment.
 
 - [R167 — Windows delayed clipboard rendering versus Wayland selection ownership](R167_CLIPBOARD_DELAYED_RENDER_WAYLAND_SELECTION_GATES.md): Microsoft clipboard ownership, render messages and window-station sequence contracts contrasted with Wayland focus-scoped offers; proposed lifecycle, access-control and differential gates. Documentation only; no experiment.
+
+- [R168 — Windows condition-variable lock modes versus pthread waits](R168_CONDITION_VARIABLE_LOCK_MODE_GATES.md): Microsoft and POSIX primary contracts distinguish atomic guest critical-section/SRW shared-or-exclusive release-and-reacquire from pthread mutex-only waits, with timeout, cancellation and lost-wakeup gates. Documentation only; no experiment.
