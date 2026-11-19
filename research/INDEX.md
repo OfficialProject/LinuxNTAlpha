@@ -324,3 +324,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R175 — COM apartment identity, message pumping and marshaling gates](R175_COM_APARTMENT_MESSAGE_PUMP_GATES.md): Microsoft primary COM contracts identify per-thread initialization, STA dispatch, cross-apartment proxies and mode-change errors as a guest USER32/COM integration gate. Windows-reference tests proposed; no experiment.
 
 - [R176 — QPC frequency and Linux clock-domain translation](R176_QPC_CLOCK_DOMAIN_TRANSLATION_GATES.md): Microsoft QPC/QPF and Linux clock_gettime contracts distinguish stable guest counter frequency, epoch/clock selection, host slewing, overflow and shared-data consistency. Proposes Windows-reference and Linux differential gates; documentation only, no experiment.
+
+- [R177 — Windows working-set policy and Linux reclaim gates](R177_WORKING_SET_MEMORY_PRIORITY_LINUX_RECLAIM_GATES.md): Microsoft and Linux primary contracts distinguish process resident working-set bounds, hard flags, memory priority and trim from Linux madvise, mlock and cgroup memory controls. Differential/security gates proposed; no experiment.
