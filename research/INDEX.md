@@ -344,3 +344,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R185 — x64 stack-probe helper and guest stack-growth gates](R185_X64_STACK_PROBE_CHKSTK_GATES.md): Microsoft and LLVM primary sources distinguish compiler-inserted __chkstk probes from frame allocation, guard growth and /GS; proposes Windows-reference and Linux PE-fixture conformance gates. Documentation only; no experiment.
 
 - [R186 — registry hive flush durability and Linux persistence gates](R186_REGISTRY_HIVE_FLUSH_DURABILITY_GATES.md): Microsoft RegFlushKey visibility-versus-durability and hive-wide blocking contracts contrasted with Linux fsync/rename persistence boundaries; proposes crash-recovery, race and privilege conformance gates. Documentation only; no experiment.
+
+- [R188 — dynamic x64 function-table registration and unwind ownership gates](R188_DYNAMIC_X64_FUNCTION_TABLE_UNWIND_GATES.md): Microsoft PE/x64 unwind and RtlAdd/Delete/Callback/Growable function-table contracts distinguish image unwind data from process-registered JIT metadata; proposes lifetime, concurrency, debugger and security conformance gates. Documentation only; no experiment.
