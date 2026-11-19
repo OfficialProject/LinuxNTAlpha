@@ -340,3 +340,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R183 — Win32k lockdown and GUI-thread transition gates](R183_WIN32K_LOCKDOWN_GUI_THREAD_GATES.md): Microsoft primary mitigation contracts distinguish blocked guest NTUser/GDI service entry and GUI-thread conversion from generic Linux syscalls or user-mode API names. Proposes Windows-reference, broker authorization and race/security gates; documentation only, no experiment.
 
 - [R184 — seccomp user-notification NT syscall broker gates](R184_SECCOMP_USER_NOTIFICATION_NT_BROKER_GATES.md): Linux upstream seccomp notification protocol, identity/cancellation, ADDFD, syscall-number collision and guest/host provenance gates; proposes differential and performance tests. Documentation only; no experiment.
+
+- [R185 — x64 stack-probe helper and guest stack-growth gates](R185_X64_STACK_PROBE_CHKSTK_GATES.md): Microsoft and LLVM primary sources distinguish compiler-inserted __chkstk probes from frame allocation, guard growth and /GS; proposes Windows-reference and Linux PE-fixture conformance gates. Documentation only; no experiment.
