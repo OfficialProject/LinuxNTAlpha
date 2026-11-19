@@ -328,3 +328,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R177 — Windows working-set policy and Linux reclaim gates](R177_WORKING_SET_MEMORY_PRIORITY_LINUX_RECLAIM_GATES.md): Microsoft and Linux primary contracts distinguish process resident working-set bounds, hard flags, memory priority and trim from Linux madvise, mlock and cgroup memory controls. Differential/security gates proposed; no experiment.
 
 - [R178 — mapped-file fault provenance and NT in-page exception gates](R178_MAPPED_FILE_FAULT_SIGBUS_NT_INPAGE_GATES.md): Microsoft EXCEPTION_IN_PAGE_ERROR and Linux SIGBUS contracts distinguish backing I/O failures from EOF/truncation and host signal provenance. Windows-reference, Linux fault and guest-ingress tests proposed; no experiment.
+
+- [R179 — child-process restriction, token authority and Linux broker bypass gates](R179_CHILD_PROCESS_RESTRICTION_TOKEN_BROKER_GATES.md): Microsoft creation-time child-policy, privileged-handle bypass and alternate-parent contracts contrasted with Linux clone semantics; proposes security and Windows/Linux differential gates. Documentation only; no experiment.
