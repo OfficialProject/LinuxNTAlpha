@@ -350,3 +350,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R189 — Windows debug-event ownership versus Linux ptrace stops](R189_DEBUG_EVENT_PTRACE_LIFECYCLE_GATES.md): Microsoft debugger-event, exception, handle-lifetime and kill-on-exit contracts contrasted with Linux ptrace stop/continuation semantics; identifies guest event ownership, rights, debugger-thread and differential conformance gates. Documentation only; no experiment.
 
 - [R190 — per-handle I/O completion notification modes](R190_IO_COMPLETION_NOTIFICATION_MODES.md): Microsoft primary contracts distinguish immediate-success IOCP suppression, handle event signaling and completion-port reassociation; proposes Windows-reference and Linux state-machine gates. Documentation only; no experiment.
+
+- [R191 — IOCP concurrency admission and worker association versus Linux readiness](R191_IOCP_CONCURRENCY_WORKER_ADMISSION_GATES.md): Microsoft IOCP FIFO packet/LIFO waiter, per-port worker association and concurrency-admission contracts contrasted with Linux epoll readiness; proposes Windows-reference and Linux conformance gates. Documentation only; no experiment.
