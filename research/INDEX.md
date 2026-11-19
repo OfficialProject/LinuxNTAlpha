@@ -326,3 +326,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R176 — QPC frequency and Linux clock-domain translation](R176_QPC_CLOCK_DOMAIN_TRANSLATION_GATES.md): Microsoft QPC/QPF and Linux clock_gettime contracts distinguish stable guest counter frequency, epoch/clock selection, host slewing, overflow and shared-data consistency. Proposes Windows-reference and Linux differential gates; documentation only, no experiment.
 
 - [R177 — Windows working-set policy and Linux reclaim gates](R177_WORKING_SET_MEMORY_PRIORITY_LINUX_RECLAIM_GATES.md): Microsoft and Linux primary contracts distinguish process resident working-set bounds, hard flags, memory priority and trim from Linux madvise, mlock and cgroup memory controls. Differential/security gates proposed; no experiment.
+
+- [R178 — mapped-file fault provenance and NT in-page exception gates](R178_MAPPED_FILE_FAULT_SIGBUS_NT_INPAGE_GATES.md): Microsoft EXCEPTION_IN_PAGE_ERROR and Linux SIGBUS contracts distinguish backing I/O failures from EOF/truncation and host signal provenance. Windows-reference, Linux fault and guest-ingress tests proposed; no experiment.
