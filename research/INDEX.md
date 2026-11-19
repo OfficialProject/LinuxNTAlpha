@@ -342,3 +342,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R184 — seccomp user-notification NT syscall broker gates](R184_SECCOMP_USER_NOTIFICATION_NT_BROKER_GATES.md): Linux upstream seccomp notification protocol, identity/cancellation, ADDFD, syscall-number collision and guest/host provenance gates; proposes differential and performance tests. Documentation only; no experiment.
 
 - [R185 — x64 stack-probe helper and guest stack-growth gates](R185_X64_STACK_PROBE_CHKSTK_GATES.md): Microsoft and LLVM primary sources distinguish compiler-inserted __chkstk probes from frame allocation, guard growth and /GS; proposes Windows-reference and Linux PE-fixture conformance gates. Documentation only; no experiment.
+
+- [R186 — registry hive flush durability and Linux persistence gates](R186_REGISTRY_HIVE_FLUSH_DURABILITY_GATES.md): Microsoft RegFlushKey visibility-versus-durability and hive-wide blocking contracts contrasted with Linux fsync/rename persistence boundaries; proposes crash-recovery, race and privilege conformance gates. Documentation only; no experiment.
