@@ -358,3 +358,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R193 — NT extended attributes versus Linux xattr backend](R193_NT_EXTENDED_ATTRIBUTES_LINUX_XATTR_GATES.md): Microsoft EA record/query/set contracts compared with Linux xattr namespaces and capacity limits; parse-only, Windows-reference, backend and security gates proposed. Documentation only; no experiment.
 
 - [R194 — PE64 process bootstrap publication and rollback](R194_PE64_BOOTSTRAP_PUBLICATION_GATES.md): primary Microsoft PE, TLS, loader, process and unwind contracts synthesized into a proposed cross-component first-entry state machine, failure rollback and differential conformance gates. Documentation only; no experiment.
+
+- [R195 — NT asynchronous request ownership across cancellation, handles and IOCP](R195_ASYNC_REQUEST_OWNERSHIP_COMPLETION_GATES.md): Microsoft and Linux primary API contracts synthesized into a candidate generation-safe request/notification ownership model, with cancellation, handle-reuse, completion and backend race gates. Documentation only; no experiment.
