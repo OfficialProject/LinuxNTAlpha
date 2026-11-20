@@ -372,3 +372,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R200 — NTFS USN change journal versus Linux notification queues](R200_USN_CHANGE_JOURNAL_LINUX_NOTIFICATION_GATES.md): Microsoft volume-scoped journal replay, continuation USN and generation identity contrasted with Linux inotify/fanotify overflow, coalescing and coverage gaps; proposes guest-owned durable journal and security/conformance gates. Documentation only; no experiment.
 
 - [R98 — KUSER_SHARED_DATA fixed-address mapping and time publication](R98_KUSER_SHARED_DATA_MAPPING_GATES.md): Microsoft WDK/MSRC primary-source review of the guest read-only shared page, versioned layout and clock consistency; proposes Windows-reference and native PE gates. No experiment.
+
+- [R98 — NT wait timeout clock and deadline gates](R98_NT_WAIT_TIMEOUT_CLOCK_GATES.md): Microsoft/Linux primary documentation distinguishes signed 100-ns NT relative/absolute deadlines, clock changes, zero/infinite waits and NTSTATUS from Linux host deadlines and EINTR. Windows-reference and isolated Linux conformance tests proposed; no experiment.
