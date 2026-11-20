@@ -354,3 +354,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R191 — IOCP concurrency admission and worker association versus Linux readiness](R191_IOCP_CONCURRENCY_WORKER_ADMISSION_GATES.md): Microsoft IOCP FIFO packet/LIFO waiter, per-port worker association and concurrency-admission contracts contrasted with Linux epoll readiness; proposes Windows-reference and Linux conformance gates. Documentation only; no experiment.
 
 - [R192 — named-pipe peek mode and transaction continuation](R192_NAMED_PIPE_PEEK_TRANSACTION_GATES.md): Microsoft PeekNamedPipe and TransactNamedPipe contracts distinguish non-consuming peeks, creation-time peek mode versus current handle read mode, partial response continuation and CallNamedPipe temporary-handle closure from AF_UNIX packet delivery. Proposed differential gates only; no experiment.
+
+- [R193 — NT extended attributes versus Linux xattr backend](R193_NT_EXTENDED_ATTRIBUTES_LINUX_XATTR_GATES.md): Microsoft EA record/query/set contracts compared with Linux xattr namespaces and capacity limits; parse-only, Windows-reference, backend and security gates proposed. Documentation only; no experiment.
