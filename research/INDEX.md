@@ -384,3 +384,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R204 — Winsock event latching versus Linux epoll readiness](R204_WINSOCK_EVENT_LATCH_EPOLL_GATES.md): Microsoft Winsock and Linux epoll primary contracts distinguish per-event reenabling, pending FD_* bits/errors, atomic enumeration/reset and window-message delivery from backend readiness. Proposed differential and race gates only; no experiment.
 
 - [R205 — Winsock linger close versus Linux socket lifetime](R205_WINSOCK_LINGER_CLOSE_LINUX_GATES.md): Microsoft Winsock and Linux/POSIX primary contracts distinguish nonblocking positive-linger close failure and preserved guest handle from Linux close behavior, and identify pending-overlapped cancellation/completion ownership. Proposed Windows/Linux differential and security gates only; no experiment.
+
+- [R98 — local RPC ncalrpc identity and transport boundaries](R98_LOCAL_RPC_NCALRPC_SECURITY_GATES.md): Microsoft RPC and Linux Unix-socket primary contracts distinguish endpoint binding, identity tracking, per-call authorization and host transport credentials; Windows-reference and Linux conformance gates proposed, no experiment.
