@@ -374,3 +374,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R98 — KUSER_SHARED_DATA fixed-address mapping and time publication](R98_KUSER_SHARED_DATA_MAPPING_GATES.md): Microsoft WDK/MSRC primary-source review of the guest read-only shared page, versioned layout and clock consistency; proposes Windows-reference and native PE gates. No experiment.
 
 - [R98 — NT wait timeout clock and deadline gates](R98_NT_WAIT_TIMEOUT_CLOCK_GATES.md): Microsoft/Linux primary documentation distinguishes signed 100-ns NT relative/absolute deadlines, clock changes, zero/infinite waits and NTSTATUS from Linux host deadlines and EINTR. Windows-reference and isolated Linux conformance tests proposed; no experiment.
+
+- [R201 — Windows unbuffered file I/O versus Linux O_DIRECT alignment gates](R201_UNBUFFERED_IO_DIRECT_ALIGNMENT_GATES.md): Microsoft and Linux primary API contracts distinguish guest sector/alignment validation, shared file-pointer seeks, host filesystem-specific direct-I/O restrictions and possible buffered fallback. Proposes Windows/Linux differential, isolation and performance gates; documentation only, no experiment.
