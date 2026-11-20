@@ -370,3 +370,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R199 — Windows EcoQoS, timer-resolution policy and Linux scheduler hints](R199_ECOQOS_TIMER_RESOLUTION_LINUX_SCHEDULER_GATES.md): Microsoft process/thread power-throttling and Linux uclamp contracts distinguish guest efficiency hints and timer-resolution suppression from CPU quotas; proposes Windows/Linux conformance and isolation gates. Documentation only; no experiment.
 
 - [R200 — NTFS USN change journal versus Linux notification queues](R200_USN_CHANGE_JOURNAL_LINUX_NOTIFICATION_GATES.md): Microsoft volume-scoped journal replay, continuation USN and generation identity contrasted with Linux inotify/fanotify overflow, coalescing and coverage gaps; proposes guest-owned durable journal and security/conformance gates. Documentation only; no experiment.
+
+- [R98 — KUSER_SHARED_DATA fixed-address mapping and time publication](R98_KUSER_SHARED_DATA_MAPPING_GATES.md): Microsoft WDK/MSRC primary-source review of the guest read-only shared page, versioned layout and clock consistency; proposes Windows-reference and native PE gates. No experiment.
