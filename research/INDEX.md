@@ -380,3 +380,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R202 — mapped-view flush versus file durability](R202_MAPPED_VIEW_FLUSH_DURABILITY_GATES.md): Microsoft and Linux primary API contracts distinguish mapped dirty-page writeback, file metadata sync and hardware/remote persistence; proposes Windows-reference, Linux backend and security gates. Documentation only; no experiment.
 
 - [R203 — NT valid-data length versus Linux zero-fill and storage isolation](R203_FILE_VALID_DATA_LENGTH_LINUX_SECURITY_GATES.md): Microsoft VDL/EOF/allocation, privileged uninitialized-data exposure and Linux fallocate zero-return contracts; proposes security and differential gates, identifies Win32/WDK exact-EOF documentation discrepancy. Documentation only; no experiment.
+
+- [R204 — Winsock event latching versus Linux epoll readiness](R204_WINSOCK_EVENT_LATCH_EPOLL_GATES.md): Microsoft Winsock and Linux epoll primary contracts distinguish per-event reenabling, pending FD_* bits/errors, atomic enumeration/reset and window-message delivery from backend readiness. Proposed differential and race gates only; no experiment.
