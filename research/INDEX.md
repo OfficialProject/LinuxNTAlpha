@@ -356,3 +356,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R192 — named-pipe peek mode and transaction continuation](R192_NAMED_PIPE_PEEK_TRANSACTION_GATES.md): Microsoft PeekNamedPipe and TransactNamedPipe contracts distinguish non-consuming peeks, creation-time peek mode versus current handle read mode, partial response continuation and CallNamedPipe temporary-handle closure from AF_UNIX packet delivery. Proposed differential gates only; no experiment.
 
 - [R193 — NT extended attributes versus Linux xattr backend](R193_NT_EXTENDED_ATTRIBUTES_LINUX_XATTR_GATES.md): Microsoft EA record/query/set contracts compared with Linux xattr namespaces and capacity limits; parse-only, Windows-reference, backend and security gates proposed. Documentation only; no experiment.
+
+- [R194 — PE64 process bootstrap publication and rollback](R194_PE64_BOOTSTRAP_PUBLICATION_GATES.md): primary Microsoft PE, TLS, loader, process and unwind contracts synthesized into a proposed cross-component first-entry state machine, failure rollback and differential conformance gates. Documentation only; no experiment.
