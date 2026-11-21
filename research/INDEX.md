@@ -406,3 +406,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R216 — PE64 CFG metadata parser and enforcement boundary](R216_PE64_CFG_METADATA_PARSER_ENFORCEMENT_GATES.md): Microsoft primary PE metadata contracts establish sorted GFIDS, versioned load-config, stride/flags and loader-installed dispatch pointers; proposes parse/publish and security gates. Documentation only; no experiment.
 
 - [R217 — dynamic CFG target mutation and Linux CET non-equivalence](R217_DYNAMIC_CFG_TARGETS_CET_NON_EQUIVALENCE_GATES.md): Microsoft runtime target mutation, export suppression and strict-mode policy contrasted with Linux CET shadow-stack/IBT support. Proposes guest-owned target registry and Windows/Linux security gates; documentation only, no experiment.
+
+- [R219 — Windows write-watch versus Linux dirty-page tracking](R219_WRITE_WATCH_LINUX_DIRTY_TRACKING_GATES.md): Microsoft allocation-scoped write-watch and reset contracts contrasted with Linux soft-dirty, userfaultfd WP and pagemap scan. Identifies per-allocation identity, concurrent reset, remap and feature-negotiation gates; documentation only, no experiment.
