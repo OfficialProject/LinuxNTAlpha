@@ -408,3 +408,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R217 — dynamic CFG target mutation and Linux CET non-equivalence](R217_DYNAMIC_CFG_TARGETS_CET_NON_EQUIVALENCE_GATES.md): Microsoft runtime target mutation, export suppression and strict-mode policy contrasted with Linux CET shadow-stack/IBT support. Proposes guest-owned target registry and Windows/Linux security gates; documentation only, no experiment.
 
 - [R219 — Windows write-watch versus Linux dirty-page tracking](R219_WRITE_WATCH_LINUX_DIRTY_TRACKING_GATES.md): Microsoft allocation-scoped write-watch and reset contracts contrasted with Linux soft-dirty, userfaultfd WP and pagemap scan. Identifies per-allocation identity, concurrent reset, remap and feature-negotiation gates; documentation only, no experiment.
+
+- [R220 — MSVC /GS cookie and CRT startup gates](R220_MSVC_GS_COOKIE_CRT_BOOTSTRAP_GATES.md): Microsoft compiler/CRT primary contracts distinguish stack-cookie initialization and fail-fast handling from PE loading, stack probing and CFG; proposes toolchain-specific Windows/Linux conformance gates. Documentation only; no experiment.
