@@ -432,3 +432,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R231 — Windows remote-file protocol reporting versus Linux filesystem metadata](R231_REMOTE_FILE_PROTOCOL_PROVIDER_IDENTITY_GATES.md): Microsoft primary API/structure contracts distinguish guest provider identity, versioned SMB capability reporting and buffer/error semantics from Linux mount metadata. Proposes Windows-reference and isolation gates; documentation only, no experiment.
 
 - [R232 — guest process identity across supervisor failure and restart](R232_GUEST_PROCESS_SUPERVISOR_FAILURE_BOUNDARY.md): cross-component primary-contract synthesis distinguishing guest object authority and terminal state from Linux worker/pidfd/fd lifetimes; proposes fail-stop versus restartable ownership and fault-injection gates. Documentation only; no experiment.
+
+- [R233 — NT process isolation versus Linux clone topology](R233_NT_PROCESS_ISOLATION_CLONE_TOPOLOGY.md): Microsoft process isolation and Linux clone/unshare contracts constrain one-host-process-per-guest versus shared-address-space designs; proposes differential and adversarial gates. Documentation only; no experiment.
