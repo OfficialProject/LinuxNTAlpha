@@ -446,3 +446,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R237 — NT keyed-event rendezvous versus Linux futex wait queues](R237_NT_KEYED_EVENT_FUTEX_RENDEZVOUS_GATES.md): PHNT, ReactOS, Wine and Linux primary-host-contract review distinguishes guest keyed-event object/key matching from host futex address waits; proposes Windows-reference, race, rights, APC, timeout and teardown gates. Documentation only; no experiment.
 
 - [R238 — API-set contract names versus physical DLL import resolution](R238_API_SET_CONTRACT_HOST_RESOLUTION_GATES.md): Microsoft API-set, PE and loader contracts distinguish virtual import aliases from backing DLL identity; proposes versioned guest resolver and Windows-reference/security conformance gates. Documentation only; no experiment.
+
+- [R239 — process/thread error modes and hard-error delivery boundaries](R239_ERROR_MODE_HARD_ERROR_BOUNDARY_GATES.md): Microsoft Win32/WDK primary contracts separate process and thread error-mode policy, WER UI, critical-error dialogs and kernel-driver hard-error APC behavior; proposes Windows-reference, headless and isolation gates. Documentation only; no experiment.
