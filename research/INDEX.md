@@ -444,3 +444,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R236 — SUD inclusive/exclusive dispatch-mode version gates](R236_SUD_INCLUSIVE_EXCLUSIVE_MODE_VERSION_GATES.md): current kernel documentation describes opposite interval policies while Linux man-pages documents the legacy ON mode; proposes feature-probed, version-pinned and adversarial mode conformance tests. Documentation review only; no experiment.
 
 - [R237 — NT keyed-event rendezvous versus Linux futex wait queues](R237_NT_KEYED_EVENT_FUTEX_RENDEZVOUS_GATES.md): PHNT, ReactOS, Wine and Linux primary-host-contract review distinguishes guest keyed-event object/key matching from host futex address waits; proposes Windows-reference, race, rights, APC, timeout and teardown gates. Documentation only; no experiment.
+
+- [R238 — API-set contract names versus physical DLL import resolution](R238_API_SET_CONTRACT_HOST_RESOLUTION_GATES.md): Microsoft API-set, PE and loader contracts distinguish virtual import aliases from backing DLL identity; proposes versioned guest resolver and Windows-reference/security conformance gates. Documentation only; no experiment.
