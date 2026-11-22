@@ -434,3 +434,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R232 — guest process identity across supervisor failure and restart](R232_GUEST_PROCESS_SUPERVISOR_FAILURE_BOUNDARY.md): cross-component primary-contract synthesis distinguishing guest object authority and terminal state from Linux worker/pidfd/fd lifetimes; proposes fail-stop versus restartable ownership and fault-injection gates. Documentation only; no experiment.
 
 - [R233 — NT process isolation versus Linux clone topology](R233_NT_PROCESS_ISOLATION_CLONE_TOPOLOGY.md): Microsoft process isolation and Linux clone/unshare contracts constrain one-host-process-per-guest versus shared-address-space designs; proposes differential and adversarial gates. Documentation only; no experiment.
+
+- [R142 — ReadFileEx/WriteFileEx initiating-thread completion routines](R142_READFILEEX_COMPLETION_ROUTINE_THREAD_AFFINITY.md): Microsoft and Linux primary contracts distinguish alertable initiating-thread callback execution from io_uring CQEs, IOCP packets and arbitrary worker callbacks; proposes differential and backend conformance gates. Documentation only; no experiment.
