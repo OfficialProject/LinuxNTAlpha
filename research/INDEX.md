@@ -436,3 +436,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R233 — NT process isolation versus Linux clone topology](R233_NT_PROCESS_ISOLATION_CLONE_TOPOLOGY.md): Microsoft process isolation and Linux clone/unshare contracts constrain one-host-process-per-guest versus shared-address-space designs; proposes differential and adversarial gates. Documentation only; no experiment.
 
 - [R142 — ReadFileEx/WriteFileEx initiating-thread completion routines](R142_READFILEEX_COMPLETION_ROUTINE_THREAD_AFFINITY.md): Microsoft and Linux primary contracts distinguish alertable initiating-thread callback execution from io_uring CQEs, IOCP packets and arbitrary worker callbacks; proposes differential and backend conformance gates. Documentation only; no experiment.
+
+- [R234 — raw NT syscall interception transition and rearm invariants](R234_SUD_REARM_TRANSITION_INVARIANTS.md): primary Linux SUD/signal and Microsoft x64 ABI contracts synthesized into a multi-trap state machine, no-unintended-Linux-entry invariants, and selector-versus-address-region differential gates. Design review only; no new experiment.
