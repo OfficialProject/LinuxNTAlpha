@@ -450,3 +450,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R239 — process/thread error modes and hard-error delivery boundaries](R239_ERROR_MODE_HARD_ERROR_BOUNDARY_GATES.md): Microsoft Win32/WDK primary contracts separate process and thread error-mode policy, WER UI, critical-error dialogs and kernel-driver hard-error APC behavior; proposes Windows-reference, headless and isolation gates. Documentation only; no experiment.
 
 - [R240 — Landlock confinement versus NT thread-token impersonation](R240_LANDLOCK_NT_IMPERSONATION_AUTHORITY_GATES.md): Linux 6.17/6.9 kernel documentation and Microsoft token contracts; separates monotonic host sandbox restrictions from dynamic guest access checks, with unrun conformance/security gates.
+
+- [R241 — Windows dynamic-code mitigation versus Linux executable mappings](R241_DYNAMIC_CODE_MITIGATION_LINUX_EXEC_MAPPING_GATES.md): Microsoft mitigation policy flags and Linux mprotect/memfd primary contracts distinguish guest executable-memory authorization from host page protections; proposes Windows differential, host-escape and architecture gates. Documentation only; no experiment.
