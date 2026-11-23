@@ -484,3 +484,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R256 — PE32+ relocation-block validation and image publication](R256_PE64_RELOCATION_BLOCK_VALIDATION_GATES.md): Microsoft PE and Linux memory-mapping primary contracts; isolates multi-block bounds, cross-page DIR64 target spans, duplicate-fixup policy and staging/rollback gates beyond R19's single fixture. Proposed tests only; no new experiment.
 
 - [R257 — legacy timer-queue callback lifetime and Linux timer backend gates](R257_LEGACY_TIMER_QUEUE_CALLBACK_LIFETIME_GATES.md): Microsoft legacy timer-queue contracts distinguish cancellation requests, outstanding callbacks, completion-event/synchronous deletion and versioned sleep accounting from a simple host timer source. Windows-reference, host and security gates proposed; documentation only, no experiment.
+
+- [R258 — SUD SIGSYS alternate-stack and handler reentrancy gates](R258_SUD_SIGNAL_ALTSTACK_REENTRANCY_GATES.md): Linux SUD, sigaltstack and async-signal-safety primary contracts; proposes per-thread stack, nested-signal, context-fidelity and host-syscall transition gates. Documentation only; no experiment.
