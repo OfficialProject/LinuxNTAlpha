@@ -508,3 +508,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R269 — per-handle completion notification suppression and IOCP packets](R269_FILE_COMPLETION_NOTIFICATION_MODES.md): Microsoft primary API contracts distinguish immediate-success IOCP suppression, file-object signaling, explicit events and per-request low-bit hEvent suppression; proposes unrun Windows-reference and Linux backend conformance gates. Documentation only; no experiment.
 
 - [R270 — child-process mitigation versus Linux creation authority](R270_CHILD_PROCESS_MITIGATION_LINUX_CREATION_AUTHORITY_GATES.md): Microsoft child-policy/override and token/handle bypass contracts contrasted with Linux broker-mediated spawning; proposes eight unrun Windows/Linux security and lifecycle gates. Documentation only; no experiment.
+
+- [R271 — source audit of the actual PE64 SUD fixture](R271_PE64_SUD_FIXTURE_SOURCE_AUDIT.md): directly inspected the one-syscall guest source, distinguished observed one-trap evidence from untested selector rearming, and specified a falsifiable three-trap/host-bridge test. No new experiment.
