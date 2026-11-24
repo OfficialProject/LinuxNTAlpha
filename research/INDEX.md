@@ -512,3 +512,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R271 — source audit of the actual PE64 SUD fixture](R271_PE64_SUD_FIXTURE_SOURCE_AUDIT.md): directly inspected the one-syscall guest source, distinguished observed one-trap evidence from untested selector rearming, and specified a falsifiable three-trap/host-bridge test. No new experiment.
 
 - [R272 — host SUD handler selector lifetime and unexpected-trap source audit](R272_SUD_HOST_HANDLER_SOURCE_AUDIT.md): direct inspection of `pe64_probe.c` establishes that the one-trap handler leaves selector ALLOW, publishes a synthetic return even for mismatched traps, and lacks a visible rearm before subsequent guest syscalls. Distinguishes source findings from unrun multi-trap, rejection and concurrency tests; no experiment.
+
+- [R273 — x64 SUD post-instruction address and rollback gates](R273_SUD_X64_POST_INSTRUCTION_ADDRESS_GATES.md): Linux v6.12 source audit identifies continuation-IP region boundaries, selector precedence and accumulator rollback; proposes isolated boundary and region-only multi-trap tests. No experiment.
