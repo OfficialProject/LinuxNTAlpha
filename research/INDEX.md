@@ -516,3 +516,5 @@ Executable sources and makefiles: [experiments](../experiments/). Command: **mak
 - [R273 — x64 SUD post-instruction address and rollback gates](R273_SUD_X64_POST_INSTRUCTION_ADDRESS_GATES.md): Linux v6.12 source audit identifies continuation-IP region boundaries, selector precedence and accumulator rollback; proposes isolated boundary and region-only multi-trap tests. No experiment.
 
 - [R274 — SUD, seccomp and syscall observability ordering](R274_SUD_SECCOMP_TRACE_OBSERVABILITY_GATES.md): Linux v6.12 entry/exit source audit establishes SUD interception before seccomp and ordinary syscall tracing, and proposes distinct guest/host telemetry and differential policy gates. No experiment.
+
+- [R275 — SUD ptrace configuration and task lifecycle](R275_SUD_PTRACE_CONFIGURATION_LIFECYCLE.md): Linux v6.12 source audit distinguishes stopped-task configuration inspection from selector memory, in-flight signal state and guest recovery; proposes unrun lifecycle, restoration and authorization gates. No experiment.
